@@ -2,7 +2,7 @@
 
 A single-file, deliberately busted 2000s-style VTuber site for **Dr. Frogman**, set in a night swamp full of lily pads.
 
-- **The frog:** a lanky, side-on frog in the style of Dat Boi, with a white sticker outline. He stands on a lily pad (no unicycle) and snaps between two dab poses like stop-motion. Poke him for a croak, a hitmarker and an emote burst. Every 5th poke plays an airhorn and drops "deal with it" shades on him.
+- **The frog:** a lanky, side-on frog in the style of Dat Boi, with a white sticker outline, tapered shaded limbs, a half-lidded gold eye that follows your cursor, and a smirk. He stands on a lily pad (no unicycle) and waves ("o shit waddup"). Poke him for a croak, a hitmarker and an emote burst. Every 5th poke plays an airhorn and drops "deal with it" shades on him.
 - **Emote Pond:** 14 original tribute frog emotes (FeelsGoodMan, monkaS, PepeHands, COPIUM, Madge, Deadge, EZ, Pepega and more). Click one to copy its name.
 - **Meme effects:** the page is deep-fried by default (button cycles fried → nuclear → clean). Every click leaves an MLG hitmarker and pops up text like "+100". Meme stickers (BASED, RATIO, SKILL ISSUE…) are slapped on every section. Also: a fake stream chat that spams emotes, Win98 error popups with a dodging OK button, a marquee and hazard tape.
 
