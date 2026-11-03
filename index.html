@@ -13,7 +13,7 @@
 <style>
 :root{
   --swamp:#1d3b14; --bog:#2b5a1c; --slime:#7bd23a; --toxic:#c6ff3d; --frog:#5fbf3a; --frog-d:#3f7f27;
-  --pad:#2f8f4e; --lotus:#ff8fc8; --fly:#fff35c; --mud:#5a4630; --ink:#111; --paper:#fffbe6;
+  --pad:#2f8f4e; --lotus:#ff2a2a; --fly:#fff35c; --mud:#5a4630; --ink:#111; --paper:#fffbe6;
   --win:#c0c0c0; --win-d:#808080; --win-blue:#000080; --err:#ff2a2a;
   --impact:"Impact","Anton","Haettenschweiler","Arial Narrow Bold",sans-serif;
   --comic:"Comic Sans MS","Comic Neue","Chalkboard SE",cursive;
@@ -99,17 +99,26 @@ body.shake #page{animation:shake .4s linear}
 @keyframes gl1{0%{clip-path:inset(0 0 60% 0)}20%{clip-path:inset(30% 0 40% 0);transform:translate(-8px,2px)}40%{clip-path:inset(70% 0 5% 0)}60%{clip-path:inset(10% 0 80% 0);transform:translate(6px,-1px)}80%{clip-path:inset(0 0 100% 0)}}
 @keyframes gl2{0%{clip-path:inset(55% 0 0 0)}25%{clip-path:inset(5% 0 75% 0);transform:translate(7px,-2px)}50%{clip-path:inset(85% 0 0 0)}75%{clip-path:inset(40% 0 30% 0);transform:translate(-5px,1px)}}
 
-.frogwrap{position:relative;width:min(300px,62vw,40vh);min-width:200px;margin:.4rem 0 -.6rem}
+.frogwrap{position:relative;width:min(330px,72vw,40vh);min-width:220px;margin:.4rem 0 -.6rem}
 .frog-btn{background:none;border:0;width:100%;display:block;-webkit-tap-highlight-color:transparent}
 .frog-btn:focus-visible{outline:4px dashed var(--toxic);outline-offset:4px}
-#frog{width:100%;height:auto;overflow:visible;animation:strut 1.1s ease-in-out infinite;transform-origin:50% 95%}
-@keyframes strut{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) translateY(-6px)}}
+#frog{width:100%;height:auto;overflow:visible;animation:strut .65s steps(2) infinite;transform-origin:50% 95%}
+@keyframes strut{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 #frog.croak{animation:croak .5s ease}
 @keyframes croak{30%{transform:translateY(-18%) scale(.92,1.1) rotate(-6deg)}60%{transform:scale(1.1,.9)}}
-#frog .arm-wave{transform-box:view-box;transform-origin:104px 215px;animation:wave .7s ease-in-out infinite}
-@keyframes wave{50%{transform:rotate(-16deg)}}
-.bubble{position:absolute;z-index:5;top:4%;right:-14%;background:#fff;color:#000;font-family:var(--comic);font-weight:700;font-size:clamp(1rem,2.6vw,1.35rem);
-  padding:.35rem .9rem;border-radius:50% 45% 50% 40%;border:3px solid #000;transform:rotate(6deg);pointer-events:none;white-space:nowrap}
+#frog .frogfig,#frog .armP,#frog .armN,#frog .head{transform-box:view-box}
+#frog .frogfig{transform-origin:200px 430px}
+#frog .armP{transform-origin:222px 154px}
+#frog .armN{transform-origin:196px 150px}
+#frog .head{transform-origin:200px 116px}
+#frog.poseB .frogfig{transform:rotate(-7deg) translateX(-8px)}
+#frog.poseB .armP{transform:rotate(52deg)}
+#frog.poseB .armN{transform:rotate(-38deg)}
+#frog.poseB .head{transform:rotate(10deg)}
+#frog .shades{transform:translateY(-260px);opacity:0;transition:transform .9s cubic-bezier(.5,0,.6,1.4),opacity .1s}
+#frog.dealwithit .shades{transform:none;opacity:1}
+.bubble{position:absolute;z-index:5;top:-4%;left:-22%;background:#fff;color:#000;font-family:var(--impact);text-transform:uppercase;font-size:clamp(1rem,2.6vw,1.45rem);
+  padding:.25rem .8rem;border-radius:0;border:3px solid #000;transform:rotate(6deg);pointer-events:none;white-space:nowrap}
 .bubble::after{content:"";position:absolute;left:16px;bottom:-14px;border:9px solid transparent;border-top-color:#000;transform:rotate(25deg)}
 .bubble.pop{animation:pop .3s ease}
 @keyframes pop{0%{transform:rotate(6deg) scale(.4)}70%{transform:rotate(10deg) scale(1.15)}}
@@ -120,7 +129,8 @@ body.shake #page{animation:shake .4s linear}
 .btn{font-family:var(--impact);text-transform:uppercase;font-size:1.15rem;letter-spacing:.04em;color:#000;text-decoration:none;
   padding:.55rem 1.1rem;border:3px solid #000;box-shadow:5px 5px 0 #000;display:inline-block;transition:transform .1s}
 .btn:nth-child(1){background:var(--toxic);transform:rotate(-3deg)}
-.btn:nth-child(2){background:var(--lotus);transform:rotate(2.5deg)}
+.btn:nth-child(2){background:var(--lotus);color:#fff;transform:rotate(2.5deg)}
+.btn:nth-child(3){background:#fff35c;transform:rotate(-1.5deg);font-size:1.15rem}
 .btn:hover{transform:rotate(0) scale(1.08);animation:jitter .15s infinite}
 @keyframes jitter{50%{transform:translate(1px,-1px) rotate(1deg) scale(1.08)}}
 .live{display:inline-flex;align-items:center;gap:.4rem;background:#000;border:2px solid var(--err);color:#fff;
@@ -262,6 +272,17 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
   padding:.5rem 1rem;border:3px solid #000;box-shadow:4px 4px 0 #000;transition:.25s;z-index:170}
 .toast.show{transform:translate(-50%,0) rotate(-2deg)}
 
+/* MLG junk */
+.hit{position:fixed;width:34px;height:34px;transform:translate(-50%,-50%);pointer-events:none;z-index:195;animation:hitfade .35s linear forwards}
+@keyframes hitfade{to{opacity:0;transform:translate(-50%,-50%) scale(1.25)}}
+.plus{position:fixed;pointer-events:none;z-index:195;font-family:var(--impact);font-size:1.6rem;color:#fff35c;-webkit-text-stroke:1.5px #000;paint-order:stroke fill;animation:plusup .9s ease-out forwards}
+@keyframes plusup{to{transform:translateY(-70px) rotate(-12deg);opacity:0}}
+.sticker{position:absolute;z-index:2;pointer-events:none;font-family:var(--impact);text-transform:uppercase;color:#fff;padding:.05rem .5rem;
+  border:3px solid #000;box-shadow:4px 4px 0 #000;font-size:clamp(1rem,2.4vw,1.6rem);white-space:nowrap;opacity:.95}
+.sticker.e{border:0;box-shadow:none;padding:0;background:none!important}
+.sticker.e img{width:clamp(56px,8vw,96px)}
+.fry2 #page{filter:saturate(7) contrast(2.4) brightness(1.1) hue-rotate(-25deg)!important}
+body.fry2 #page::after{opacity:.55}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}
   .drift{display:none}
@@ -273,8 +294,9 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
 <!-- shared SVG bits -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <radialGradient id="padGrad" cx="45%" cy="40%" r="65%"><stop offset="0" stop-color="#5cc46a"/><stop offset=".7" stop-color="#2f8f4e"/><stop offset="1" stop-color="#1f6b38"/></radialGradient>
+    <radialGradient id="padGrad" cx="45%" cy="40%" r="65%"><stop offset="0" stop-color="#1a7a2a"/><stop offset=".8" stop-color="#146322"/><stop offset="1" stop-color="#0e4d1a"/></radialGradient>
     <radialGradient id="mirrorGrad" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#cfd8dc"/><stop offset="1" stop-color="#7d8b91"/></radialGradient>
+    <filter id="sticker" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="6" result="d"/><feFlood flood-color="#fff"/><feComposite in2="d" operator="in" result="w"/><feMerge><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="boil"><feTurbulence id="boilT" type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
     <symbol id="lilypad" viewBox="0 0 100 100">
       <path d="M50 50 L59 4 A46 46 0 1 1 41 4 Z" fill="url(#padGrad)" stroke="#000" stroke-width="3"/>
@@ -302,7 +324,7 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
   <a href="#about">File</a><a href="#emotes">Emotes</a><a href="#schedule">Shedule</a><a href="#streams">Streams</a><a href="#lore">Lore</a><a href="#links">Help (no)</a>
 </nav>
 <div class="marquee" aria-hidden="true"><div>
-  ⚠ WEBSITE MAINTAINED BY A FROG ⚠ o shit waddup ⚠ do NOT lick the screen ⚠ FeelsGoodMan ⚠ herons are NOT welcome ⚠ the doctor is in (the mud) ⚠ ribbit ribbit ribbit ⚠ this marquee is load-bearing ⚠ monkaS ⚠ 9/10 swamp doctors recommend being damp ⚠
+  ⚠ WEBSITE MAINTAINED BY A FROG ⚠ o shit waddup ⚠ do NOT lick the screen ⚠ FeelsGoodMan ⚠ herons are NOT welcome ⚠ the doctor is in (the mud) ⚠ ribbit ribbit ribbit ⚠ this marquee is load-bearing ⚠ monkaS ⚠ 9/10 swamp doctors recommend being damp ⚠ L + ratio + you're damp ⚠ skill issue ⚠ certified swamp moment ⚠ DEAL WITH IT ⚠
 </div></div>
 
 <!-- ============ HERO ============ -->
@@ -324,64 +346,66 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
     <div class="frogwrap">
       <div class="bubble" id="bubble">o shit waddup</div>
       <button class="frog-btn" id="frogBtn" aria-label="Poke Dr. Frogman">
-        <svg id="frog" viewBox="0 0 300 450" aria-hidden="true">
-          <!-- lily pad (no unicycle, he's walking now) -->
-          <ellipse cx="150" cy="424" rx="140" ry="26" fill="#000"/>
-          <path d="M150 418 L174 393 A136 25 0 1 1 126 393 Z" fill="url(#padGrad)" stroke="#000" stroke-width="5"/>
-          <g stroke="#1a5a2e" stroke-width="3" fill="none"><path d="M150 418 L40 410"/><path d="M150 418 L70 436"/><path d="M150 418 L150 442"/><path d="M150 418 L232 436"/><path d="M150 418 L262 410"/></g>
-          <use href="#lotus" x="236" y="378" width="52" height="44"/>
-          <g filter="url(#boil)">
-            <!-- legs -->
+        <svg id="frog" viewBox="0 0 360 480" aria-hidden="true">
+          <!-- lily pad (flat, no unicycle) -->
+          <path d="M175 452 L200 432 A150 26 0 1 1 150 432 Z" fill="#146322" stroke="#000" stroke-width="5"/>
+          <g stroke="#0b3d14" stroke-width="3" fill="none"><path d="M175 452 L50 456"/><path d="M175 452 L110 474"/><path d="M175 452 L250 474"/><path d="M175 452 L305 454"/></g>
+          <g class="frogfig" filter="url(#sticker)">
+            <!-- BACK LEG (shaded) -->
             <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M128 318 Q66 326 80 370 Q88 392 110 404" stroke="#000" stroke-width="30"/>
-              <path d="M172 318 Q234 326 220 370 Q212 392 190 404" stroke="#000" stroke-width="30"/>
-              <path d="M128 318 Q66 326 80 370 Q88 392 110 404" stroke="#5fbf3a" stroke-width="19"/>
-              <path d="M172 318 Q234 326 220 370 Q212 392 190 404" stroke="#5fbf3a" stroke-width="19"/>
+              <g stroke="#000"><path d="M236 288 L266 348" stroke-width="34"/><path d="M266 348 L250 414" stroke-width="20"/><path d="M250 418 L302 430" stroke-width="13"/></g>
+              <g stroke="#078a0c"><path d="M236 288 L266 348" stroke-width="26"/><path d="M266 348 L250 414" stroke-width="12"/><path d="M250 418 L302 430" stroke-width="6"/></g>
             </g>
-            <g fill="#5fbf3a" stroke="#000" stroke-width="5" stroke-linejoin="round">
-              <path d="M84 414 Q96 398 116 400 L140 410 Q130 418 118 416 L128 424 Q110 424 100 418 L96 426 Q86 422 84 414Z"/>
-              <path d="M216 414 Q204 398 184 400 L160 410 Q170 418 182 416 L172 424 Q190 424 200 418 L204 426 Q214 422 216 414Z"/>
+            <!-- BODY -->
+            <path d="M168 118 C152 160 148 222 158 266 C166 304 204 318 234 304 C256 292 258 250 250 208 C243 166 232 128 216 100 Z" fill="#0fbd12" stroke="#000" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M176 150 C168 190 168 236 184 280" stroke="#078a0c" stroke-width="5" fill="none"/>
+            <path d="M226 170 C232 200 236 236 232 268" stroke="#000" stroke-width="2.5" fill="none"/>
+            <path d="M206 300 C214 290 222 292 230 282" stroke="#000" stroke-width="2.5" fill="none"/>
+            <!-- FRONT LEG -->
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <g stroke="#000"><path d="M206 290 L160 352" stroke-width="40"/><path d="M160 352 L198 414" stroke-width="22"/><path d="M198 420 L140 432" stroke-width="14"/>
+                <path d="M140 432 L118 420 M140 432 L114 434 M140 432 L122 446" stroke-width="8"/></g>
+              <g stroke="#0fbd12"><path d="M206 290 L160 352" stroke-width="32"/><path d="M160 352 L198 414" stroke-width="14"/><path d="M198 420 L140 432" stroke-width="7"/>
+                <path d="M140 432 L118 420 M140 432 L114 434 M140 432 L122 446" stroke-width="3.5"/></g>
             </g>
-            <!-- right arm (down, sassy) -->
-            <g fill="none" stroke-linecap="round">
-              <path d="M196 214 Q240 248 226 296" stroke="#000" stroke-width="26"/>
-              <path d="M196 214 Q240 248 226 296" stroke="#5fbf3a" stroke-width="15"/>
+            <path d="M170 330 C178 340 180 352 176 362" stroke="#000" stroke-width="2.5" fill="none"/>
+            <!-- HEAD (side profile, flat top, snout up-left) -->
+            <g class="head">
+              <path d="M222 106 C224 70 210 42 178 36 C152 32 120 44 88 64 L84 76 C100 88 130 104 156 118 C176 128 200 132 216 124 Z" fill="#0fbd12" stroke="#000" stroke-width="5" stroke-linejoin="round"/>
+              <!-- open mouth -->
+              <path d="M86 72 C116 76 150 86 182 102 L176 116 C150 112 118 96 92 82 Z" fill="#06600a" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/>
+              <path d="M184 102 C192 106 198 110 204 108" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- eye -->
+              <path d="M150 44 C158 34 176 34 184 46" stroke="#000" stroke-width="3" fill="none"/>
+              <circle cx="167" cy="54" r="8.5"/><circle cx="164" cy="51" r="2.6" fill="#fff"/>
+              <circle cx="102" cy="62" r="2.2"/>
+              <!-- DEAL WITH IT shades (dropped in by JS) -->
+              <g class="shades" transform="translate(6 0)"><path d="M128 44 H206 V52 H198 V60 H190 V66 H168 V60 H160 V52 H146 V60 H138 V66 H128 Z" fill="#000"/>
+                <path d="M172 52 h6 v4 h-6z M180 56 h6 v4 h-6z M140 54 h4 v4 h-4z" fill="#fff"/></g>
             </g>
-            <g fill="#5fbf3a" stroke="#000" stroke-width="4"><circle cx="214" cy="312" r="8"/><circle cx="228" cy="316" r="8"/><circle cx="241" cy="308" r="8"/><circle cx="226" cy="300" r="13"/></g>
-            <!-- body union (outline pass then fill pass) -->
-            <g fill="#5fbf3a" stroke="#000" stroke-width="11" stroke-linejoin="round">
-              <ellipse cx="150" cy="262" rx="62" ry="86"/><ellipse cx="150" cy="126" rx="104" ry="58"/><circle cx="96" cy="74" r="42"/><circle cx="204" cy="74" r="42"/>
-            </g>
-            <g fill="#5fbf3a">
-              <ellipse cx="150" cy="262" rx="62" ry="86"/><ellipse cx="150" cy="126" rx="104" ry="58"/><circle cx="96" cy="74" r="42"/><circle cx="204" cy="74" r="42"/>
-            </g>
-            <ellipse cx="150" cy="280" rx="42" ry="62" fill="#eef38a" stroke="#000" stroke-width="4"/>
-            <g fill="#3f8f26"><circle cx="70" cy="132" r="9"/><circle cx="232" cy="128" r="11"/><circle cx="246" cy="150" r="5"/><circle cx="120" cy="208" r="6"/><circle cx="186" cy="228" r="8"/></g>
-            <!-- head mirror band -->
-            <path d="M62 92 Q150 30 238 92" stroke="#222" stroke-width="7" fill="none"/>
-            <!-- eyes -->
-            <circle cx="96" cy="72" r="32" fill="#fff" stroke="#000" stroke-width="5"/>
-            <circle cx="204" cy="72" r="32" fill="#fff" stroke="#000" stroke-width="5"/>
-            <g class="pupil" data-cx="96" data-cy="72" data-dir="1"><circle cx="96" cy="72" r="9"/><circle cx="93" cy="69" r="3" fill="#fff"/></g>
-            <g class="pupil" data-cx="204" data-cy="72" data-dir="-1"><circle cx="204" cy="72" r="6"/></g>
-            <circle cx="150" cy="56" r="22" fill="url(#mirrorGrad)" stroke="#000" stroke-width="5"/>
-            <circle cx="150" cy="56" r="5"/>
-            <!-- grin -->
-            <path d="M60 128 Q150 214 240 128" stroke="#000" stroke-width="7" fill="none" stroke-linecap="round"/>
-            <path d="M54 122 Q58 134 68 134" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <path d="M246 122 Q242 134 232 134" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <circle cx="138" cy="118" r="3"/><circle cx="162" cy="118" r="3"/>
-            <ellipse cx="62" cy="152" rx="14" ry="7" fill="#ff8fc8" opacity=".7"/>
-            <!-- stethoscope -->
-            <path d="M112 178 Q110 230 150 238 Q190 230 188 178" stroke="#222" stroke-width="6" fill="none"/>
-            <circle cx="150" cy="242" r="11" fill="url(#mirrorGrad)" stroke="#000" stroke-width="4"/>
-            <!-- waving arm -->
-            <g class="arm-wave">
-              <g fill="none" stroke-linecap="round">
-                <path d="M104 214 Q58 200 52 142" stroke="#000" stroke-width="26"/>
-                <path d="M104 214 Q58 200 52 142" stroke="#5fbf3a" stroke-width="15"/>
+            <!-- NEAR ARM (bent across chest, dab) -->
+            <g class="armN">
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <g stroke="#000"><path d="M196 150 L150 200" stroke-width="26"/><path d="M150 200 L126 150" stroke-width="22"/>
+                  <path d="M124 144 L108 124 M124 144 L118 120 M124 144 L130 122" stroke-width="8"/></g>
+                <g stroke="#0fbd12"><path d="M196 150 L150 200" stroke-width="18"/><path d="M150 200 L126 150" stroke-width="14"/>
+                  <path d="M124 144 L108 124 M124 144 L118 120 M124 144 L130 122" stroke-width="3.5"/></g>
               </g>
-              <g fill="#5fbf3a" stroke="#000" stroke-width="4"><circle cx="36" cy="114" r="8"/><circle cx="52" cy="106" r="8"/><circle cx="68" cy="112" r="8"/><circle cx="52" cy="128" r="14"/></g>
+              <g fill="#0fbd12" stroke="#000" stroke-width="2.5"><circle cx="107" cy="122" r="4"/><circle cx="118" cy="118" r="4"/><circle cx="131" cy="120" r="4"/></g>
+              <path d="M142 186 C138 176 136 168 134 160" stroke="#000" stroke-width="2.5" fill="none"/>
+            </g>
+            <!-- POINTING ARM (long, sinewy) -->
+            <g class="armP">
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <g stroke="#000"><path d="M222 154 L268 132" stroke-width="24"/><path d="M268 132 L312 100" stroke-width="22"/>
+                  <ellipse cx="284" cy="120" rx="18" ry="9" transform="rotate(-36 284 120)" stroke-width="8" fill="#000"/>
+                  <path d="M314 98 L338 82 M314 98 L342 94 M314 98 L336 108" stroke-width="8"/></g>
+                <g stroke="#0fbd12"><path d="M222 154 L268 132" stroke-width="16"/><path d="M268 132 L312 100" stroke-width="13"/>
+                  <ellipse cx="284" cy="120" rx="18" ry="9" transform="rotate(-36 284 120)" stroke-width="1" fill="#0fbd12"/>
+                  <path d="M314 98 L338 82 M314 98 L342 94 M314 98 L336 108" stroke-width="3.5"/></g>
+              </g>
+              <g fill="#0fbd12" stroke="#000" stroke-width="2.5"><circle cx="339" cy="81" r="4"/><circle cx="343" cy="94" r="4"/><circle cx="337" cy="109" r="4"/></g>
+              <path d="M272 124 C282 124 292 116 298 108 M248 140 C256 140 262 136 266 132" stroke="#000" stroke-width="2.5" fill="none"/>
             </g>
           </g>
         </svg>
@@ -392,8 +416,9 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
     <div class="btnrow">
       <a class="btn" href="#links">join the pond</a>
       <a class="btn" href="#emotes">steal emotes</a>
+      <button class="btn" id="hornBtn" type="button">📯 airhorn</button>
     </div>
-    <p class="counter">frog poked <b id="count">0</b> times · he does not consent · poke him</p>
+    <p class="counter">frog poked <b id="count">0</b> times · every 5th poke: airhorn · skill issue if you don't</p>
   </div>
 
   <aside class="chat" aria-label="Fake stream chat">
@@ -439,7 +464,7 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
 <!-- ============ EMOTES ============ -->
 <section id="emotes">
   <div class="wrap">
-    <h2>Emote Pond</h2><span class="scribble">tribute to the greatest frog of all time 🫡</span>
+    <h2>Emote Pond</h2><span class="scribble">tribute to the greatest frog of all time. copy them. use them. ratio someone.</span>
     <div class="emote-pond" id="emotePond"></div>
     <p class="emote-tip">click an emote to copy its name. spam them in chat. the doctor insists.</p>
   </div>
@@ -490,7 +515,7 @@ footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 
       <a class="social" style="--r:-6deg" href="#" target="_blank" rel="noopener" data-e="good"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>twitch</span></a>
       <a class="social" style="--r:4deg"  href="#" target="_blank" rel="noopener" data-e="laugh"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>youtube</span></a>
       <a class="social" style="--r:-3deg" href="#" target="_blank" rel="noopener" data-e="ez"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>steam</span></a>
-      <a class="social" style="--r:7deg"  href="#" target="_blank" rel="noopener" data-e="clap"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>discord</span></a>
+      <a class="social" style="--r:7deg"  href="#" target="_blank" rel="noopener" data-e="madge"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>discord</span></a>
       <a class="social" style="--r:-5deg" href="#" target="_blank" rel="noopener" data-e="smug"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>socials</span></a>
     </div>
     <button class="steam-name" id="steamName" title="Copy Steam name">D R . F R O G M A N 📋</button>
@@ -541,14 +566,15 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const NAME = "D R . F R O G M A N";
 
 /* ---------- EMOTES (original frog-face drawings, tribute-style) ---------- */
-const G="#5aa83a", O="#10240c", LIP="#c45a4c";
+const G="#14b414", O="#000", LIP="#b8402f";
 function face(o={}){
   const {eyes="open",mouth="smile",extra=[],pupil=[0,0],wide=false,lidRot=0,lidDrop=0}=o;
   const base=`<ellipse cx="50" cy="60" rx="40" ry="30"/><circle cx="32" cy="36" r="17"/><circle cx="68" cy="36" r="17"/>`;
-  let s=`<g fill="${G}" stroke="${O}" stroke-width="6">${base}</g><g fill="${G}">${base}</g>`;
+  let s=`<g fill="${G}" stroke="${O}" stroke-width="7">${base}</g><g fill="${G}">${base}</g>`;
   if(extra.includes("mirror")) s+=`<path d="M18 30 Q50 6 82 30" stroke="#222" stroke-width="3" fill="none"/><circle cx="50" cy="18" r="9" fill="#dfe6e9" stroke="${O}" stroke-width="2.5"/><circle cx="50" cy="18" r="2.5" fill="${O}"/>`;
   const eye=(cx,side)=>{
     const cy=37;
+    if(eyes==="x") return `<path d="M${cx-8} ${cy-7} L${cx+8} ${cy+7} M${cx+8} ${cy-7} L${cx-8} ${cy+7}" stroke="${O}" stroke-width="4" stroke-linecap="round"/>`;
     if(eyes==="happy") return `<path d="M${cx-11} ${cy+3} Q${cx} ${cy-9} ${cx+11} ${cy+3}" stroke="${O}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
     const big=eyes==="wide";
     let px=pupil[0], py=pupil[1];
@@ -576,9 +602,12 @@ function face(o={}){
   if(extra.includes("hands")) s+=`<g fill="${G}" stroke="${O}" stroke-width="2.5"><ellipse cx="30" cy="86" rx="15" ry="10"/><ellipse cx="70" cy="86" rx="15" ry="10"/></g><path d="M22 82 v6 M30 80 v8 M78 82 v6 M70 80 v8" stroke="${O}" stroke-width="1.5"/>`;
   if(extra.includes("clap")) s+=`<g fill="${G}" stroke="${O}" stroke-width="2.5"><ellipse cx="44" cy="88" rx="9" ry="12" transform="rotate(-20 44 88)"/><ellipse cx="56" cy="88" rx="9" ry="12" transform="rotate(20 56 88)"/></g><path d="M34 76 l-6 -4 M66 76 l6 -4 M50 72 v-5" stroke="#fff35c" stroke-width="2.5" stroke-linecap="round"/>`;
   if(extra.includes("mask")) s+=`<rect x="32" y="60" width="36" height="22" rx="9" fill="#dfe6e9" stroke="${O}" stroke-width="2.5"/><path d="M68 72 Q92 78 94 99" stroke="#8fa3a8" stroke-width="5" fill="none"/><text x="50" y="75" font-size="7" text-anchor="middle" font-family="Arial" font-weight="bold" fill="${O}">COPE</text>`;
+  if(extra.includes("vein")) s+=`<path d="M78 8 q5 6 0 12 M88 8 q-5 6 0 12 M76 11 q7 4 14 0 M76 17 q7 -4 14 0" stroke="#ff1a1a" stroke-width="3" fill="none"/>`;
+  if(extra.includes("redface")) s+=`<ellipse cx="50" cy="58" rx="34" ry="14" fill="#ff1a1a" opacity=".35"/>`;
+  if(extra.includes("tongue")) s+=`<path d="M58 72 q4 14 12 10 q2 -6 -4 -12z" fill="#ff5a7a" stroke="${O}" stroke-width="2"/>`;
   if(extra.includes("hand")) s+=`<g fill="${G}" stroke="${O}" stroke-width="2.5"><ellipse cx="86" cy="70" rx="9" ry="13"/></g>`;
   const wrap = wide ? `<g transform="translate(-14 14) scale(1.28 .72)">${s}</g>` : s;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">${wrap}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 112 112"><defs><filter id="s" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="4" result="d"/><feFlood flood-color="#fff"/><feComposite in2="d" operator="in" result="w"/><feMerge><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#s)">${wrap}</g></svg>`;
 }
 const EMOTES = {
   good:  {name:"FeelsGoodMan",   opts:{eyes:"happy",mouth:"smile"}},
@@ -590,10 +619,11 @@ const EMOTES = {
   smug:  {name:"pepeSmug",       opts:{eyes:"lids",mouth:"smirk",lidDrop:3,pupil:[4,2]}},
   copium:{name:"COPIUM",         opts:{eyes:"lids",mouth:"",lidRot:10,lidDrop:2,extra:["mask"]}},
   ez:    {name:"EZ",             opts:{eyes:"shades",mouth:"smirk"}},
-  wide:  {name:"widepeepoHappy", opts:{eyes:"happy",mouth:"smile",wide:true,extra:["blush"]}},
+  madge: {name:"Madge",          opts:{eyes:"lids",mouth:"frown",lidRot:-22,lidDrop:1,extra:["vein","redface"]}},
   pepega:{name:"Pepega",         opts:{eyes:"crossed",mouth:"shout",extra:["hand"]}},
-  clap:  {name:"peepoClap",      opts:{eyes:"happy",mouth:"smile",extra:["clap","blush"]}},
-  doc:   {name:"frogmanDoc",     opts:{eyes:"open",mouth:"smile",extra:["mirror","blush"]}}
+  deadge:{name:"Deadge",         opts:{eyes:"x",mouth:"flat",extra:["tongue"]}},
+  clap:  {name:"peepoClap",      opts:{eyes:"happy",mouth:"smile",extra:["clap"]}},
+  doc:   {name:"frogmanDoc",     opts:{eyes:"lids",mouth:"smirk",lidDrop:2,pupil:[-3,1],extra:["mirror"]}}
 };
 const uri = svg => "data:image/svg+xml,"+encodeURIComponent(svg);
 for (const k in EMOTES) EMOTES[k].src = uri(face(EMOTES[k].opts));
@@ -633,8 +663,8 @@ if(!reduce) for(let i=0;i<14;i++){
   const size=rand(50,130), dur=rand(30,80);
   d.style.width=size+"px"; d.style.top=rand(5,80)+"%";
   d.style.animationDuration=dur+"s"; d.style.animationDelay=-rand(0,dur)+"s"; d.style.setProperty("--spin",rand(-120,120)+"deg");
-  if(Math.random()<.25){ d.innerHTML=`<img src="${pick(Object.values(EMOTES)).src}" alt="">`; d.style.width=size*.6+"px"; }
-  else d.innerHTML=`<svg viewBox="0 0 100 100" style="transform:scaleY(.45)"><use href="#lilypad"/>${Math.random()<.35?'<use href="#lotus" x="25" y="10" width="50" height="45" transform="scale(1 2.1) translate(0 -18)"/>':''}</svg>`;
+  if(Math.random()<.45){ d.innerHTML=`<img src="${pick(Object.values(EMOTES)).src}" alt="">`; d.style.width=size*.6+"px"; }
+  else d.innerHTML=`<svg viewBox="0 0 100 100" style="transform:scaleY(.45)"><use href="#lilypad"/></svg>`;
   water.appendChild(d);
 }
 water.addEventListener("pointerdown",e=>{
@@ -652,6 +682,51 @@ window.addEventListener("pointermove",e=>{
     const a=Math.atan2(e.clientY-cy,e.clientX-cx), d=Math.min(18,Math.hypot(e.clientX-cx,e.clientY-cy)/18);
     p.setAttribute("transform",`translate(${Math.cos(a)*d*dir} ${Math.sin(a)*d*dir})`);  // right eye goes the WRONG way
   });
+});
+
+/* stop-motion pose snapping */
+if(!reduce) setInterval(()=>frog.classList.toggle("poseB"),650);
+
+/* airhorn (synth) */
+function airhorn(){
+  try{
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)(); const t=ac.currentTime;
+    [[0,.13],[.17,.08],[.29,.13],[.47,.55]].forEach(([off,len])=>{
+      const g=ac.createGain(), f=ac.createBiquadFilter(); f.type="lowpass"; f.frequency.value=2600;
+      g.gain.setValueAtTime(0,t+off); g.gain.linearRampToValueAtTime(.18,t+off+.015); g.gain.setValueAtTime(.18,t+off+len-.03); g.gain.linearRampToValueAtTime(0,t+off+len);
+      f.connect(g); g.connect(ac.destination);
+      [349,352,523,698].forEach(fr=>{ const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=fr; o.connect(f); o.start(t+off); o.stop(t+off+len+.02); });
+    });
+  }catch(e){}
+}
+$("#hornBtn").addEventListener("click",e=>{ e.stopPropagation(); airhorn(); dealWithIt(); });
+let dwT;
+function dealWithIt(){ clearTimeout(dwT); dwT=setTimeout(()=>frog.classList.remove("dealwithit"),3500); frog.classList.remove("dealwithit"); void frog.getBoundingClientRect(); frog.classList.add("dealwithit"); bubble.textContent="DEAL WITH IT"; bubble.classList.remove("pop"); void bubble.offsetWidth; bubble.classList.add("pop"); }
+
+/* MLG hitmarkers on every click */
+const HIT='<svg viewBox="0 0 40 40"><path d="M3 3 L15 15 M37 3 L25 15 M3 37 L15 25 M37 37 L25 25" stroke="#000" stroke-width="7"/><path d="M3 3 L15 15 M37 3 L25 15 M3 37 L15 25 M37 37 L25 25" stroke="#fff" stroke-width="3.5"/></svg>';
+function tick(){ try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); const t=ac.currentTime, b=ac.createBuffer(1,ac.sampleRate*.04,ac.sampleRate), d=b.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
+  const src=ac.createBufferSource(), f=ac.createBiquadFilter(), g=ac.createGain(); f.type="highpass"; f.frequency.value=2500; g.gain.value=.5;
+  src.buffer=b; src.connect(f); f.connect(g); g.connect(ac.destination); src.start(t); }catch(e){} }
+const PLUS=["+100","+69","WOW","REKT","NO SCOPE","+1 FROG","BASED","OOF"];
+document.addEventListener("pointerdown",e=>{
+  const h=document.createElement("div"); h.className="hit"; h.innerHTML=HIT; h.style.left=e.clientX+"px"; h.style.top=e.clientY+"px";
+  document.body.appendChild(h); setTimeout(()=>h.remove(),400); tick();
+  if(Math.random()<.45){ const p=document.createElement("div"); p.className="plus"; p.textContent=pick(PLUS); p.style.left=(e.clientX+12)+"px"; p.style.top=(e.clientY-30)+"px"; document.body.appendChild(p); setTimeout(()=>p.remove(),950); }
+});
+
+/* meme stickers slapped on every section */
+const WORDS=[["BASED","#ff2a2a"],["RATIO","#000"],["SKILL ISSUE","#7a00ff"],["BRUH","#ff6a00"],["NO CAP","#000"],["W","#14b414"],["L","#ff2a2a"],["SWAMP MOMENT","#0057ff"],["GET REKT","#ff2a2a"],["CRINGE","#ff6a00"],["CROAKED","#000"],["DEAL WITH IT","#000"]];
+document.querySelectorAll("section").forEach((sec,i)=>{
+  for(let k=0;k<3;k++){
+    const st=document.createElement("div"); st.className="sticker"; st.setAttribute("aria-hidden","true");
+    if((i+k)%2){ const em=pick(Object.values(EMOTES)); st.classList.add("e"); st.innerHTML=`<img src="${em.src}" alt="">`; }
+    else { const w=pick(WORDS); st.textContent=w[0]; st.style.background=w[1]; }
+    st.style.left=rand(2,82)+"%"; st.style.top=(k===0?rand(2,12):k===1?rand(40,55):rand(80,90))+"%";
+    st.style.transform=`rotate(${rand(-25,25)}deg)`;
+    sec.appendChild(st);
+  }
 });
 
 /* croak sound (synth) */
@@ -680,7 +755,7 @@ function burstAt(x,y,n=8){
 }
 let count=0; try{count=+localStorage.getItem("frogman-pokes")||0;}catch(e){}
 $("#count").textContent=count;
-const lines=["o shit waddup","RIBBIT","*croak*","say ahh","ur damp. next","FeelsGoodMan","pls stop","i'm a doctor","where's my wheel","monkaS"];
+const lines=["o shit waddup","RIBBIT","skill issue","ur damp. next","ratio","get rekt","stop poking me","where's my wheel","L + ratio","BRUH","no scope"];
 const bubble=$("#bubble");
 $("#frogBtn").addEventListener("click",e=>{
   frog.classList.remove("croak"); void frog.getBoundingClientRect(); frog.classList.add("croak");
@@ -688,6 +763,7 @@ $("#frogBtn").addEventListener("click",e=>{
   bubble.textContent = count && count%10===0 ? `${count} POKES?? 💀` : pick(lines);
   bubble.classList.remove("pop"); void bubble.offsetWidth; bubble.classList.add("pop");
   const r=frog.getBoundingClientRect(); burstAt(e.clientX||r.left+r.width/2, e.clientY||r.top+r.height/3, reduce?0:7);
+  if((count+1)%5===0){ airhorn(); dealWithIt(); }
   count++; $("#count").textContent=count; try{localStorage.setItem("frogman-pokes",count);}catch(err){}
   if(count%15===0) { document.body.classList.add("shake"); setTimeout(()=>document.body.classList.remove("shake"),450); }
   addMsg(pick(USERS),pick(["LMAO :PepeLaugh:","he poked him :monkaS:","o shit waddup","RIBBIT :peepoClap:","leave him alone :PepeHands:"]));
@@ -698,7 +774,7 @@ frog.addEventListener("animationend",e=>{ if(e.animationName==="croak") frog.cla
 const USERS=[["tadpole_tim","#ff7f50"],["xX_lilypad_Xx","#9acd32"],["heron_hater","#1e90ff"],["bogwitch","#da70d6"],["mossboss","#00ff7f"],["fly_enjoyer","#ffd700"],["croakington","#ff69b4"],["swamp_nurse","#87cefa"],["mudpuppy99","#ff4500"],["wheel_truther","#b0e0e6"]];
 const CHAT=[
   "o shit waddup","here he comes :monkaS:",":FeelsGoodMan: :FeelsGoodMan: :FeelsGoodMan:","doc my leg is damp","where is the unicycle :Sadge:",
-  "this site is broken :PepeLaugh:","RIBBIT","first",":widepeepoHappy:","doc is that legal",":COPIUM: he'll get the wheel back",
+  "this site is broken :PepeLaugh:","RIBBIT","first",":Madge:","doc is that legal",":COPIUM: he'll get the wheel back",
   "EZ :EZ:","is this a real doctor :monkaS:",":peepoClap: :peepoClap:","heron in chat??","FROGMAN FROGMAN FROGMAN",
   ":pepeSmug: nice website","my frog has a cough :Pepega:",":frogmanDoc: say ahh","lost the game again :PepeHands:","croak if you love the swamp",
   ":FeelsBadMan: missed stream yesterday","who let him code"
@@ -748,7 +824,11 @@ function showToast(m){ toast.textContent=m; toast.classList.add("show"); clearTi
 async function copy(text,msg){ try{ await navigator.clipboard.writeText(text); showToast(msg); }catch(e){ showToast(text); } }
 $("#steamName").addEventListener("click",()=>copy(NAME,"copied. see u in the swamp"));
 
-$("#fry").addEventListener("click",()=>{ const on=document.body.classList.toggle("fried"); $("#fry").textContent=on?"un-fry 🧊":"deep fry 🔥"; croakSound(); });
+// fry levels: 1 (default) -> 2 (nuclear) -> 0 (clean) -> 1
+let fry=1; const FRY=[["","deep fry 🔥"],["fried","FRY HARDER 🔥🔥"],["fried fry2","un-fry 🧊"]];
+function setFry(n){ fry=n; document.body.classList.remove("fried","fry2"); if(FRY[n][0]) document.body.classList.add(...FRY[n][0].split(" ")); $("#fry").textContent=FRY[n][1]; }
+setFry(1);
+$("#fry").addEventListener("click",()=>{ setFry((fry+1)%3); airhorn(); });
 
 // Win98 popup
 const popup=$("#popup"), okBtn=$("#popOk");
