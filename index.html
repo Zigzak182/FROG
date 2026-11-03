@@ -3,441 +3,468 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>D R . F R O G M A N — Swamp VTuber</title>
-<meta name="description" content="Dr. Frogman — the swamp's least-licensed physician. VTuber streaming games, chaos and ribbits straight from the bog.">
-<meta name="theme-color" content="#0b2a24">
+<title>D R . F R O G M A N — here he comes</title>
+<meta name="description" content="Dr. Frogman: swamp VTuber, unlicensed frog doctor, professional ribbiter. o shit waddup.">
+<meta name="theme-color" content="#3a7d1e">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%B8%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Comic+Neue:wght@400;700&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
 <style>
 :root{
-  --deep:#0b2a24; --murk:#12392f; --bog:#1b4a3a; --moss:#3f7d3a;
-  --frog:#6cc04a; --lime:#b6e35a; --belly:#d4f29c; --pad:#2f8f4e; --pad-dark:#1f6b38;
-  --lotus:#f7a1c4; --lotus-deep:#e06b9e; --fly:#f5e66b; --mud:#5a4630;
-  --cream:#f3f0d7; --ink:#08201b; --muted:#a9c9b4;
-  --radius:22px;
+  --swamp:#1d3b14; --bog:#2b5a1c; --slime:#7bd23a; --toxic:#c6ff3d; --frog:#5fbf3a; --frog-d:#3f7f27;
+  --pad:#2f8f4e; --lotus:#ff8fc8; --fly:#fff35c; --mud:#5a4630; --ink:#111; --paper:#fffbe6;
+  --win:#c0c0c0; --win-d:#808080; --win-blue:#000080; --err:#ff2a2a;
+  --impact:"Impact","Anton","Haettenschweiler","Arial Narrow Bold",sans-serif;
+  --comic:"Comic Sans MS","Comic Neue","Chalkboard SE",cursive;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{
-  font-family:"Nunito",system-ui,sans-serif;color:var(--cream);
-  background:var(--deep);line-height:1.6;overflow-x:hidden;overflow-x:clip;
+  font-family:var(--comic);color:var(--paper);line-height:1.5;overflow-x:hidden;overflow-x:clip;
+  background:var(--swamp);
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%AA%B0%3C/text%3E%3C/svg%3E") 14 14, auto;
 }
-h1,h2,h3,.display{font-family:"Lilita One","Nunito",sans-serif;font-weight:400;letter-spacing:.02em}
-a{color:var(--lime)}
+a,button{cursor:inherit}
 img,svg{display:block}
 
-/* ---------- NAV ---------- */
-nav{
-  position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-  padding:.8rem clamp(1rem,4vw,2.5rem);
-  background:linear-gradient(to bottom,rgba(8,32,27,.85),rgba(8,32,27,0));
-  backdrop-filter:blur(2px);
-}
-.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--cream);font-family:"Lilita One";font-size:1.25rem;letter-spacing:.12em}
-.logo svg{width:34px;height:34px}
-nav ul{display:flex;gap:clamp(.6rem,2.5vw,1.8rem);list-style:none}
-nav ul a{color:var(--cream);text-decoration:none;font-weight:700;font-size:.95rem;opacity:.85;transition:.2s}
-nav ul a:hover{opacity:1;color:var(--lime)}
-@media (max-width:640px){nav ul{display:none}}
+/* deep-fry overlay: noise + scanlines over whole page */
+#page{position:relative;transition:filter .4s}
+#page::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+  repeating-linear-gradient(0deg,rgba(0,0,0,.5) 0 1px,transparent 1px 3px)}
+body.fried #page{filter:saturate(4) contrast(1.7) brightness(1.05) hue-rotate(-12deg)}
+body.fried #page::after{opacity:.35}
+body.shake #page{animation:shake .4s linear}
+@keyframes shake{20%{transform:translate(-6px,3px) rotate(-.4deg)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,-2px) rotate(.3deg)}80%{transform:translate(3px,4px)}}
 
-/* ---------- HERO / SWAMP ---------- */
-.hero{
-  position:relative;min-height:100vh;min-height:100svh;overflow:hidden;isolation:isolate;
-  background:
-    radial-gradient(circle at 78% 18%, rgba(245,230,107,.18) 0 6%, transparent 22%),
-    linear-gradient(180deg,#071c1a 0%,#0d3029 38%,#164536 58%,#0f3a30 59%,#0b2a24 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-}
-.hero .water{height:44%}
-.moon{position:absolute;top:11%;right:16%;width:clamp(60px,9vw,120px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 38% 35%,#fffbe0,#efe39a 60%,#cdbf6a);
-  box-shadow:0 0 60px 18px rgba(245,230,107,.25);z-index:-3}
+/* ---------- WIN98 TITLE BAR ---------- */
+.titlebar{display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  background:linear-gradient(90deg,var(--win-blue),#1084d0);color:#fff;font-family:"VT323",monospace;font-size:1.15rem;
+  padding:.15rem .3rem .15rem .6rem;border-bottom:3px solid var(--win)}
+.titlebar .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.winbtns{display:flex;gap:3px;flex-shrink:0}
+.winbtns button,.w98btn{font-family:"VT323",monospace;font-size:1rem;background:var(--win);color:#000;min-width:24px;height:22px;
+  border:2px solid;border-color:#fff var(--win-d) var(--win-d) #fff;line-height:1}
+.winbtns button:active,.w98btn:active{border-color:var(--win-d) #fff #fff var(--win-d)}
+.menubar{background:var(--win);color:#000;font-family:"VT323",monospace;font-size:1.15rem;display:flex;flex-wrap:wrap;gap:0 1.2rem;padding:.1rem .7rem;border-bottom:2px solid var(--win-d)}
+.menubar a{color:#000;text-decoration:none}
+.menubar a::first-letter{text-decoration:underline}
+.menubar a:hover{background:var(--win-blue);color:#fff}
+
+.marquee{background:#000;color:var(--toxic);font-family:"VT323",monospace;font-size:1.3rem;overflow:hidden;white-space:nowrap;border-block:3px solid var(--toxic)}
+.marquee div{display:inline-block;padding-left:100%;animation:marq 38s linear infinite}
+@keyframes marq{to{transform:translateX(-100%)}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate;min-height:calc(100svh - 90px);
+  background:linear-gradient(180deg,#0e2210 0%,#264d17 45%,#3c6e1e 56%,#22521f 57%,#163a14 100%);
+  display:grid;grid-template-columns:1fr minmax(260px,330px);align-items:end;gap:1rem;padding:1.5rem clamp(.8rem,3vw,2.5rem) 2rem}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.moon{position:absolute;top:6%;right:24%;width:clamp(70px,10vw,130px);z-index:-3;opacity:.85;
+  filter:sepia(1) saturate(2.5) hue-rotate(10deg) drop-shadow(0 0 40px rgba(255,243,92,.6));animation:moonspin 40s linear infinite}
+@keyframes moonspin{to{transform:rotate(360deg)}}
 .stars{position:absolute;inset:0 0 45% 0;z-index:-4}
-.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.6;animation:twinkle 3s ease-in-out infinite}
-@keyframes twinkle{50%{opacity:.1}}
-
-.treeline{position:absolute;left:0;right:0;bottom:41%;height:22%;z-index:-2;color:#0a2520}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;opacity:.6;animation:twinkle 2.4s steps(2) infinite}
+@keyframes twinkle{50%{opacity:0}}
+.treeline{position:absolute;left:0;right:0;bottom:43%;height:20%;z-index:-2;color:#0d2a0d}
 .treeline svg{width:100%;height:100%}
+.water{position:absolute;left:0;right:0;bottom:0;height:43%;z-index:-1;overflow:hidden;
+  background:repeating-linear-gradient(180deg,rgba(198,255,61,.07) 0 3px,transparent 3px 16px),linear-gradient(180deg,#2c6a2a,#173f17)}
+.drift{position:absolute;animation:drift linear infinite;pointer-events:none}
+.drift svg,.drift img{width:100%;height:auto}
+@keyframes drift{from{transform:translateX(-25vw) rotate(0)}to{transform:translateX(125vw) rotate(var(--spin,40deg))}}
+.ripple{position:absolute;border:3px solid rgba(198,255,61,.8);border-radius:50%;transform:translate(-50%,-50%) scale(.1);
+  width:140px;height:44px;pointer-events:none;animation:ripple 1.3s ease-out forwards}
+@keyframes ripple{to{transform:translate(-50%,-50%) scale(1.7);opacity:0}}
+.reeds{position:absolute;bottom:28%;z-index:1;width:clamp(80px,13vw,170px);pointer-events:none}
+.reeds.left{left:-14px}.reeds.right{right:-14px;transform:scaleX(-1)}
+.reeds svg{width:100%;height:auto;transform-origin:bottom;animation:sway 3s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(4deg) skewX(3deg)}}
+.fireflies{position:absolute;inset:0;pointer-events:none;z-index:2}
+.fireflies i{position:absolute;width:6px;height:6px;background:var(--fly);box-shadow:0 0 10px 4px rgba(255,243,92,.6);
+  animation:float var(--d,9s) ease-in-out infinite,glow 1.4s steps(2) infinite;animation-delay:var(--delay,0s)}
+@keyframes float{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-40px)}50%{transform:translate(-20px,-70px)}75%{transform:translate(-40px,-20px)}}
+@keyframes glow{50%{opacity:.2}}
 
-.water{position:absolute;left:0;right:0;bottom:0;height:42%;z-index:-1;overflow:hidden;
-  background:
-    repeating-linear-gradient(180deg,rgba(182,227,90,.05) 0 2px,transparent 2px 18px),
-    linear-gradient(180deg,#1a5240 0%,#103a2e 50%,#0b2a24 100%);
-  cursor:crosshair}
-.water::before{content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse 30% 8% at 78% 6%,rgba(245,230,107,.35),transparent 70%);
-  animation:shimmer 4s ease-in-out infinite}
-@keyframes shimmer{50%{opacity:.5;transform:scaleX(1.15)}}
+.stage{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
+.meme{font-family:var(--impact);text-transform:uppercase;color:#fff;line-height:.95;letter-spacing:.02em;
+  -webkit-text-stroke:2px #000;paint-order:stroke fill;
+  text-shadow:3px 3px 0 #000,-3px 3px 0 #000,3px -3px 0 #000,-3px -3px 0 #000,0 3px 0 #000,0 -3px 0 #000,3px 0 0 #000,-3px 0 0 #000}
+.meme.top{font-size:clamp(2.2rem,7vw,5rem);transform:rotate(-3deg)}
+.glitch{position:relative;display:inline-block;font-size:clamp(2.2rem,7.6vw,5.6rem);color:var(--toxic);margin-top:.2rem;transform:rotate(2deg) skewX(-6deg)}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;-webkit-text-stroke:0;text-shadow:none}
+.glitch::before{color:#ff2a8a;transform:translate(-4px,0);clip-path:inset(0 0 60% 0);animation:gl1 2.2s steps(1) infinite;mix-blend-mode:screen}
+.glitch::after{color:#29e3ff;transform:translate(4px,0);clip-path:inset(55% 0 0 0);animation:gl2 1.7s steps(1) infinite;mix-blend-mode:screen}
+@keyframes gl1{0%{clip-path:inset(0 0 60% 0)}20%{clip-path:inset(30% 0 40% 0);transform:translate(-8px,2px)}40%{clip-path:inset(70% 0 5% 0)}60%{clip-path:inset(10% 0 80% 0);transform:translate(6px,-1px)}80%{clip-path:inset(0 0 100% 0)}}
+@keyframes gl2{0%{clip-path:inset(55% 0 0 0)}25%{clip-path:inset(5% 0 75% 0);transform:translate(7px,-2px)}50%{clip-path:inset(85% 0 0 0)}75%{clip-path:inset(40% 0 30% 0);transform:translate(-5px,1px)}}
 
-.drift{position:absolute;will-change:transform;animation:drift linear infinite;pointer-events:none}
-.drift svg{width:100%;height:auto;filter:drop-shadow(0 6px 4px rgba(0,0,0,.35))}
-@keyframes drift{
-  from{transform:translateX(-25vw) rotate(0deg)}
-  to{transform:translateX(125vw) rotate(var(--spin,40deg))}
-}
-.ripple{position:absolute;border:2px solid rgba(212,242,156,.7);border-radius:50%;transform:translate(-50%,-50%) scale(.1);
-  width:140px;height:44px;pointer-events:none;animation:ripple 1.4s ease-out forwards}
-@keyframes ripple{to{transform:translate(-50%,-50%) scale(1.6);opacity:0}}
+.frogwrap{position:relative;width:min(300px,62vw,40vh);min-width:200px;margin:.4rem 0 -.6rem}
+.frog-btn{background:none;border:0;width:100%;display:block;-webkit-tap-highlight-color:transparent}
+.frog-btn:focus-visible{outline:4px dashed var(--toxic);outline-offset:4px}
+#frog{width:100%;height:auto;overflow:visible;animation:strut 1.1s ease-in-out infinite;transform-origin:50% 95%}
+@keyframes strut{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) translateY(-6px)}}
+#frog.croak{animation:croak .5s ease}
+@keyframes croak{30%{transform:translateY(-18%) scale(.92,1.1) rotate(-6deg)}60%{transform:scale(1.1,.9)}}
+#frog .arm-wave{transform-box:view-box;transform-origin:104px 215px;animation:wave .7s ease-in-out infinite}
+@keyframes wave{50%{transform:rotate(-16deg)}}
+.bubble{position:absolute;z-index:5;top:4%;right:-14%;background:#fff;color:#000;font-family:var(--comic);font-weight:700;font-size:clamp(1rem,2.6vw,1.35rem);
+  padding:.35rem .9rem;border-radius:50% 45% 50% 40%;border:3px solid #000;transform:rotate(6deg);pointer-events:none;white-space:nowrap}
+.bubble::after{content:"";position:absolute;left:16px;bottom:-14px;border:9px solid transparent;border-top-color:#000;transform:rotate(25deg)}
+.bubble.pop{animation:pop .3s ease}
+@keyframes pop{0%{transform:rotate(6deg) scale(.4)}70%{transform:rotate(10deg) scale(1.15)}}
+.burst{position:fixed;width:56px;pointer-events:none;z-index:150;animation:burst 1.1s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--bx),var(--by)) rotate(var(--br)) scale(1.3);opacity:0}}
 
-.reeds{position:absolute;bottom:30%;z-index:2;width:clamp(90px,16vw,200px);pointer-events:none}
-.reeds.left{left:-10px}.reeds.right{right:-10px;transform:scaleX(-1)}
-.reeds svg{width:100%;height:auto;transform-origin:bottom center;animation:sway 5s ease-in-out infinite}
-@keyframes sway{50%{transform:rotate(2.5deg)}}
-
-.fireflies{position:absolute;inset:0;pointer-events:none;z-index:3}
-.fireflies i{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--fly);
-  box-shadow:0 0 10px 4px rgba(245,230,107,.6);animation:float var(--d,9s) ease-in-out infinite, glow 2.2s ease-in-out infinite;animation-delay:var(--delay,0s)}
-@keyframes float{
-  0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-40px)}
-  50%{transform:translate(-20px,-70px)}75%{transform:translate(-40px,-20px)}}
-@keyframes glow{50%{opacity:.15}}
-
-.hero-content{position:relative;z-index:4;text-align:center;padding:0 1rem;margin:.6rem 0 clamp(1rem,4vh,3rem);width:100%;text-shadow:0 2px 8px rgba(8,32,27,.9)}
-.hero-content .tagline{background:radial-gradient(ellipse at center,rgba(8,32,27,.65),transparent 70%)}
-.title{font-size:clamp(2rem,7.5vw,5.6rem);line-height:1;display:flex;flex-wrap:wrap;justify-content:center;gap:.08em .32em;
-  color:var(--lime);text-shadow:0 4px 0 var(--pad-dark),0 8px 24px rgba(0,0,0,.5)}
-.title span{display:inline-block;transition:transform .2s}
-.title span:hover{animation:hop .5s ease}
-.title .gap{width:.35em}
-@keyframes hop{30%{transform:translateY(-.35em) rotate(-6deg)}60%{transform:translateY(0)}75%{transform:translateY(-.08em)}}
-.tagline{margin:.9rem auto 0;max-width:36rem;font-size:clamp(1rem,2.2vw,1.2rem);color:var(--belly)}
-.tagline small{opacity:.6}
-.cta{margin-top:1.4rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
-.btn{text-shadow:none;display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.4rem;border-radius:999px;font-weight:900;text-decoration:none;
-  font-size:1rem;border:3px solid var(--ink);transition:transform .15s, box-shadow .15s;box-shadow:0 5px 0 var(--ink)}
-.btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 var(--ink)}
-.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
-.btn.primary{background:var(--lime);color:var(--ink)}
-.btn.secondary{background:var(--lotus);color:var(--ink)}
-
-/* frog */
-.frog-stage{position:relative;z-index:4;width:min(320px,62vw);margin-top:clamp(5rem,14vh,9rem)}
-.frog-btn{background:none;border:0;cursor:pointer;width:100%;display:block;-webkit-tap-highlight-color:transparent}
-.frog-btn:focus-visible{outline:3px dashed var(--lime);outline-offset:6px;border-radius:30px}
-#frog{width:100%;height:auto;overflow:visible;animation:breathe 3.2s ease-in-out infinite;transform-origin:50% 90%}
-#frog.croak{animation:croak .55s ease}
-@keyframes breathe{50%{transform:scale(1.02,.98)}}
-@keyframes croak{0%{transform:scale(1)}25%{transform:translateY(-14%) scale(.95,1.08)}55%{transform:translateY(0) scale(1.08,.92)}100%{transform:scale(1)}}
-#frog .eye{transform-box:fill-box;transform-origin:center;transition:transform .08s}
-#frog.blink .eye{transform:scaleY(.08)}
-#frog .throat{transform-box:fill-box;transform-origin:50% 0;transform:scale(0);transition:transform .15s}
-#frog.croak .throat{transform:scale(1)}
-.pad-under{width:130%;margin:-22% -15% 0;position:relative;z-index:-1;pointer-events:none}
-.bubble{position:absolute;top:-6%;right:-10%;background:var(--cream);color:var(--ink);font-family:"Lilita One";font-size:1.3rem;
-  padding:.35rem .9rem;border-radius:18px;border:3px solid var(--ink);opacity:0;transform:scale(.4) rotate(8deg);transition:.2s;pointer-events:none}
-.bubble::after{content:"";position:absolute;left:14px;bottom:-12px;border:8px solid transparent;border-top-color:var(--ink)}
-.bubble.show{opacity:1;transform:scale(1) rotate(6deg)}
-.counter{margin-top:.4rem;font-size:.9rem;color:var(--muted)}
+.btnrow{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.btn{font-family:var(--impact);text-transform:uppercase;font-size:1.15rem;letter-spacing:.04em;color:#000;text-decoration:none;
+  padding:.55rem 1.1rem;border:3px solid #000;box-shadow:5px 5px 0 #000;display:inline-block;transition:transform .1s}
+.btn:nth-child(1){background:var(--toxic);transform:rotate(-3deg)}
+.btn:nth-child(2){background:var(--lotus);transform:rotate(2.5deg)}
+.btn:hover{transform:rotate(0) scale(1.08);animation:jitter .15s infinite}
+@keyframes jitter{50%{transform:translate(1px,-1px) rotate(1deg) scale(1.08)}}
+.live{display:inline-flex;align-items:center;gap:.4rem;background:#000;border:2px solid var(--err);color:#fff;
+  font-family:"VT323",monospace;font-size:1.15rem;padding:0 .6rem;margin-bottom:.4rem;transform:rotate(-1.5deg)}
+.live .dot{width:10px;height:10px;border-radius:50%;background:#777}
+.live.on .dot{background:var(--err);animation:glow .8s steps(2) infinite}
+.counter{margin-top:.8rem;font-size:.95rem;color:#dfffb0;text-shadow:2px 2px 0 #000}
 .counter b{color:var(--fly)}
 
-.live{display:inline-flex;align-items:center;gap:.5rem;background:rgba(8,32,27,.7);border:2px solid var(--pad);
-  padding:.3rem .9rem;border-radius:999px;font-weight:700;font-size:.85rem;margin-bottom:1rem}
-.live .dot{width:10px;height:10px;border-radius:50%;background:#7a8c84}
-.live.on .dot{background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.7);animation:pulse 1.5s infinite}
-@keyframes pulse{to{box-shadow:0 0 0 12px rgba(255,77,109,0)}}
+/* fake chat */
+.chat{position:relative;z-index:3;background:#18181b;border:3px solid #000;box-shadow:6px 6px 0 #000;transform:rotate(1.2deg);
+  display:flex;flex-direction:column;height:min(460px,60vh);font-family:system-ui,sans-serif;font-size:.88rem}
+@media (max-width:860px){.chat{height:260px;transform:none}}
+.chat header{background:#0e0e10;color:#efeff1;padding:.4rem .7rem;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between}
+.chat header span{color:var(--err)}
+.msgs{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:.4rem .6rem;gap:.25rem;color:#efeff1}
+.msgs p{line-height:1.7;word-break:break-word;animation:in .2s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.msgs b{font-weight:700}
+.msgs img{display:inline-block;width:28px;height:28px;vertical-align:middle;margin:0 2px}
+.chat .fakein{border-top:1px solid #333;padding:.5rem;display:flex;gap:.4rem}
+.chat .fakein input{flex:1;background:#2a2a2d;border:1px solid #444;color:#fff;padding:.35rem .5rem;border-radius:4px;font:inherit}
+.chat .fakein button{background:#9147ff;color:#fff;border:0;border-radius:4px;padding:0 .7rem;font-weight:700}
 
 /* ---------- SECTIONS ---------- */
-section{position:relative;overflow-x:clip;padding:clamp(4rem,9vw,7rem) clamp(1rem,5vw,3rem)}
+section{position:relative;padding:clamp(3.5rem,8vw,6rem) clamp(1rem,4vw,2.5rem);overflow-x:clip}
 .wrap{max-width:1100px;margin:0 auto}
-.kicker{display:inline-flex;align-items:center;gap:.5rem;color:var(--lotus);font-weight:900;letter-spacing:.2em;font-size:.8rem;text-transform:uppercase}
-h2{font-size:clamp(2rem,5vw,3.2rem);color:var(--lime);margin:.3rem 0 1.4rem;line-height:1.1}
-.wave-top{position:absolute;top:-1px;left:0;width:100%;height:60px;transform:translateY(-99%)}
+h2{font-family:var(--impact);text-transform:uppercase;font-size:clamp(2.2rem,6vw,3.8rem);color:#fff;line-height:1;margin-bottom:1.6rem;
+  -webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:4px 4px 0 #000;display:inline-block}
+h2 s{color:var(--err);text-decoration-thickness:5px}
+.scribble{font-family:"Permanent Marker",cursive;color:var(--fly);font-size:1.1rem;transform:rotate(-4deg);display:inline-block;margin-left:.6rem}
 
-#about{background:var(--murk)}
-.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start}
+.hazard{height:26px;background:repeating-linear-gradient(-45deg,#ffd400 0 22px,#000 22px 44px);border-block:3px solid #000;
+  display:grid;place-items:center;font-family:var(--impact);letter-spacing:.2em;font-size:.95rem;color:#000;position:relative}
+.hazard span{background:#ffd400;padding:0 .6rem;border:2px solid #000}
+
+/* about */
+#about{background:
+  radial-gradient(circle at 15% 30%,rgba(123,210,58,.25),transparent 40%),
+  repeating-linear-gradient(45deg,#24481a 0 40px,#1f4016 40px 80px)}
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:2.4rem;align-items:start}
 @media (max-width:820px){.about-grid{grid-template-columns:1fr}}
-.about-text p{margin-bottom:1rem;font-size:1.08rem;color:#dfe9d6}
-.chart{background:var(--cream);color:var(--ink);border-radius:var(--radius);padding:1.6rem 1.6rem 1.3rem;position:relative;
-  box-shadow:0 10px 0 var(--pad-dark),0 20px 40px rgba(0,0,0,.35);transform:rotate(1.2deg)}
-.chart::before{content:"";position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:110px;height:30px;border-radius:8px;
-  background:linear-gradient(#c9c9c9,#8d8d8d);border:3px solid var(--ink)}
-.chart h3{font-size:1.4rem;color:var(--pad-dark);border-bottom:3px dashed var(--pad);padding-bottom:.4rem;margin-bottom:.8rem;display:flex;justify-content:space-between;align-items:center}
-.chart h3 small{font-family:"Nunito";font-size:.75rem;font-weight:900;background:var(--lotus);padding:.15rem .5rem;border-radius:6px}
-.chart dl{display:grid;grid-template-columns:auto 1fr;gap:.45rem 1rem;font-size:.97rem}
-.chart dt{font-weight:900;color:var(--pad-dark);text-transform:uppercase;font-size:.78rem;letter-spacing:.08em;padding-top:.15rem}
-.stamp{position:absolute;right:1rem;bottom:.9rem;border:3px solid #c0392b;color:#c0392b;font-family:"Lilita One";padding:.1rem .6rem;
-  transform:rotate(-14deg);opacity:.75;font-size:1rem;border-radius:6px}
+.note{background:var(--paper);color:#1a1a1a;padding:1.5rem 1.4rem;position:relative;box-shadow:8px 8px 0 #000;transform:rotate(-1.5deg);
+  background-image:repeating-linear-gradient(transparent 0 27px,#9ec5e8 27px 28px);line-height:28px;font-size:1.05rem}
+.note::before{content:"";position:absolute;top:-14px;left:40%;width:120px;height:30px;background:rgba(255,240,140,.85);transform:rotate(4deg);border:1px dashed #b9a400}
+.note p{margin-bottom:28px}
+.note s{color:#c00}
+.note mark{background:var(--toxic)}
+.chart{background:#fff;color:#000;border:3px solid #000;box-shadow:-8px 8px 0 var(--lotus),-8px 8px 0 3px #000;transform:rotate(2.5deg);font-family:"VT323",monospace;font-size:1.25rem;position:relative}
+.chart .titlebar{font-size:1.05rem}
+.chart dl{display:grid;grid-template-columns:auto 1fr;gap:.15rem .9rem;padding:1rem 1.1rem 3.5rem}
+.chart dt{color:var(--win-blue)}
+.chart dd s{color:#c00}
+.stamp{position:absolute;right:.7rem;bottom:.6rem;border:4px double var(--err);color:var(--err);font-family:var(--impact);padding:.05rem .5rem;
+  transform:rotate(-14deg);font-size:1.15rem;letter-spacing:.05em}
+.broken{margin-top:1.4rem;display:flex;align-items:center;gap:.5rem;background:#fff;color:#000;border:2px inset #999;padding:.5rem .7rem;
+  font-family:"Times New Roman",serif;font-size:.95rem;width:max-content;max-width:100%;transform:rotate(-2deg)}
+.broken::before{content:"";width:18px;height:20px;flex-shrink:0;background:
+  linear-gradient(135deg,transparent 45%,#e33 45% 55%,transparent 55%),linear-gradient(#ddd,#ddd);border:1px solid #777}
+
+/* emotes */
+#emotes{background:radial-gradient(ellipse at 50% 0%,#3c7a22,#183a12 70%)}
+.emote-pond{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1.4rem 1rem}
+.emote{position:relative;background:none;border:0;color:#fff;display:flex;flex-direction:column;align-items:center;gap:.2rem;
+  font-family:"VT323",monospace;font-size:1.15rem;padding-top:.3rem}
+.emote .padbg{position:absolute;top:30px;left:50%;width:128px;transform:translateX(-50%) rotate(var(--r,0deg)) scaleY(.5);z-index:0;filter:drop-shadow(0 6px 0 rgba(0,0,0,.4))}
+.emote img{position:relative;z-index:1;width:96px;height:96px;transition:transform .2s}
+.emote span{position:relative;z-index:1;background:#000;padding:0 .4rem;margin-top:.2rem}
+.emote:hover img{animation:emobounce .4s ease infinite}
+@keyframes emobounce{50%{transform:translateY(-10px) rotate(-8deg) scale(1.1)}}
+.emote-tip{margin-top:1.4rem;color:#dfffb0;font-size:.95rem}
 
 /* schedule */
-#schedule{background:linear-gradient(180deg,var(--murk),var(--bog))}
-.pond{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:1.2rem}
-.day{position:relative;aspect-ratio:1;display:grid;place-items:center;text-align:center;padding:1.2rem;transition:transform .25s}
-.day:hover{transform:translateY(-6px) rotate(-3deg)}
-.day svg.padbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:drop-shadow(0 8px 6px rgba(0,0,0,.35))}
-.day:nth-child(even) svg.padbg{transform:rotate(120deg)}
-.day:nth-child(3n) svg.padbg{transform:rotate(220deg)}
+#schedule{background:linear-gradient(180deg,#183a12,#2b5a1c)}
+.pond{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1.4rem 1rem}
+.day{position:relative;aspect-ratio:1;display:grid;place-items:center;text-align:center;padding:1.3rem;transform:rotate(var(--r,0deg)) translateY(var(--y,0px));transition:transform .2s}
+.day:hover{transform:rotate(calc(var(--r,0deg) * -2)) scale(1.06)}
+.day svg.padbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:drop-shadow(5px 6px 0 #000)}
 .day > div{position:relative;z-index:1}
-.day .dname{font-family:"Lilita One";font-size:1.35rem;color:var(--cream);text-shadow:0 2px 0 var(--pad-dark)}
-.day .time{font-weight:900;color:var(--ink);background:var(--lime);border-radius:999px;padding:.1rem .6rem;font-size:.85rem;display:inline-block;margin:.25rem 0}
-.day .what{font-size:.82rem;color:var(--cream);font-weight:700;line-height:1.25}
-.day.off .time{background:var(--mud);color:var(--cream)}
-.day.off{opacity:.8}
-.tz{margin-top:1.4rem;color:var(--muted);font-size:.9rem}
+.day .dname{font-family:var(--impact);font-size:1.6rem;color:#fff;-webkit-text-stroke:1.5px #000;paint-order:stroke fill;text-transform:uppercase}
+.day .time{font-family:"VT323",monospace;font-size:1.2rem;color:#000;background:var(--toxic);border:2px solid #000;padding:0 .4rem;display:inline-block;transform:rotate(-4deg)}
+.day .what{font-size:.82rem;color:#fff;font-weight:700;line-height:1.2;margin-top:.2rem;text-shadow:1px 1px 0 #000}
+.day.off .time{background:var(--mud);color:#fff}
+.tz{margin-top:1.6rem;color:#dfffb0;font-size:.95rem}
 
 /* streams */
-#streams{background:var(--bog)}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.3rem}
-.card{background:rgba(8,32,27,.55);border:2px solid var(--pad);border-radius:var(--radius);padding:1.5rem;transition:.25s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--lime);transform:translateY(-4px)}
-.card .ico{font-size:2.2rem;line-height:1;margin-bottom:.6rem}
-.card h3{font-size:1.35rem;color:var(--lime);margin-bottom:.35rem}
-.card p{color:#cfe0cf;font-size:.97rem}
-.card::after{content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;
-  background:conic-gradient(from 20deg,transparent 0 22deg,rgba(47,143,78,.35) 22deg 360deg)}
+#streams{background:#2b5a1c}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem 1.2rem}
+.card{background:var(--paper);color:#111;border:3px solid #000;box-shadow:7px 7px 0 #000;padding:1.2rem 1.2rem 1.3rem;transform:rotate(var(--r));position:relative}
+.card:hover{transform:rotate(0) translateY(-4px)}
+.card img{width:64px;height:64px;position:absolute;top:-26px;right:-12px;transform:rotate(12deg)}
+.card h3{font-family:var(--impact);text-transform:uppercase;font-size:1.5rem;font-weight:400;color:var(--pad);margin-bottom:.3rem;-webkit-text-stroke:.5px #000}
+.card p{font-size:.98rem}
 
 /* lore */
-#lore{background:linear-gradient(180deg,var(--bog),var(--murk))}
-.lore{display:grid;gap:1.2rem;max-width:760px;margin:0 auto;counter-reset:ch}
-.lore article{background:rgba(243,240,215,.06);border-left:6px solid var(--lotus);padding:1.2rem 1.4rem;border-radius:0 var(--radius) var(--radius) 0}
-.lore article h3{color:var(--lotus);font-size:1.25rem;margin-bottom:.3rem}
-.lore article h3::before{counter-increment:ch;content:"Chapter " counter(ch) " · ";color:var(--muted);font-family:"Nunito";font-weight:900;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
-.lore p{color:#dfe9d6}
+#lore{background:repeating-linear-gradient(-45deg,#1f4016 0 40px,#24481a 40px 80px)}
+.lore{max-width:780px;margin:0 auto;display:grid;gap:1.8rem}
+.lore article{background:#000;color:var(--toxic);font-family:"VT323",monospace;font-size:1.3rem;line-height:1.3;padding:1rem 1.2rem;border:3px solid var(--toxic);
+  box-shadow:0 0 20px rgba(198,255,61,.3);transform:rotate(var(--r))}
+.lore h3{font-weight:400;color:#fff;margin-bottom:.3rem}
+.lore h3::before{content:"C:\\SWAMP\\LORE> "}
+.cursor::after{content:"█";animation:glow 1s steps(2) infinite}
 
 /* links */
-#links{background:var(--murk);text-align:center}
-.socials{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1rem}
-.social{position:relative;width:150px;aspect-ratio:1;display:grid;place-items:center;text-decoration:none;color:var(--cream);
-  font-weight:900;transition:transform .25s}
-.social svg.padbg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 8px 6px rgba(0,0,0,.35));transition:transform .4s}
-.social:hover{transform:translateY(-8px)}
-.social:hover svg.padbg{transform:rotate(-25deg)}
-.social span{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;font-size:1rem}
-.social span em{font-style:normal;font-size:2rem;line-height:1}
-.steam-name{margin-top:2rem;display:inline-block;font-family:"Lilita One";letter-spacing:.25em;font-size:1.1rem;background:var(--ink);
-  border:2px dashed var(--pad);padding:.6rem 1.2rem;border-radius:14px;cursor:pointer;color:var(--lime)}
-.steam-name:hover{border-color:var(--lime)}
+#links{background:radial-gradient(ellipse at 50% 100%,#3c7a22,#183a12 70%);text-align:center}
+.socials{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.social{position:relative;width:150px;aspect-ratio:1;display:grid;place-items:center;text-decoration:none;color:#fff;transition:transform .2s;transform:rotate(var(--r))}
+.social svg.padbg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(5px 6px 0 #000);transition:transform .4s}
+.social:hover{transform:translateY(-8px) rotate(0)}
+.social:hover svg.padbg{transform:rotate(-40deg)}
+.social span{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;font-family:var(--impact);text-transform:uppercase;font-size:1.1rem;-webkit-text-stroke:1px #000;paint-order:stroke fill}
+.social img{width:54px;height:54px}
+.steam-name{margin-top:2.2rem;font-family:"VT323",monospace;font-size:1.6rem;letter-spacing:.15em;background:#000;color:var(--toxic);
+  border:3px dashed var(--toxic);padding:.4rem 1rem;transform:rotate(-2deg)}
+.steam-name:hover{background:var(--toxic);color:#000}
 
-footer{background:var(--ink);text-align:center;padding:2.5rem 1rem 3rem;color:var(--muted);font-size:.9rem;position:relative}
-footer .lotus-row{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem}
-footer .lotus-row svg{width:40px;height:40px}
+footer{background:#000;color:#9c9;text-align:center;padding:2rem 1rem 6rem;font-family:"VT323",monospace;font-size:1.2rem}
+.hits{display:inline-flex;gap:2px;margin:.6rem 0}
+.hits b{background:#111;color:var(--err);border:1px solid #444;padding:0 .35rem;font-size:1.6rem;text-shadow:0 0 6px var(--err)}
+footer .badges{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.8rem}
+footer .badges span{border:2px outset #ccc;background:#333;color:#fff;padding:0 .4rem;font-size:1rem}
 
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--lime);color:var(--ink);font-weight:900;
-  padding:.7rem 1.2rem;border-radius:999px;border:3px solid var(--ink);transition:.3s;z-index:99}
-.toast.show{transform:translate(-50%,0)}
-
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
+/* ---------- FLOATING JUNK ---------- */
+.fry{position:fixed;right:12px;bottom:12px;z-index:120;font-family:var(--impact);font-size:1.05rem;text-transform:uppercase;
+  background:#ff6a00;color:#fff;-webkit-text-stroke:.5px #000;border:3px solid #000;box-shadow:4px 4px 0 #000;padding:.4rem .8rem;transform:rotate(-4deg)}
+.fry:hover{background:var(--err)}
+.peek{position:fixed;left:14px;bottom:-110px;width:96px;z-index:110;transition:bottom .5s cubic-bezier(.3,1.6,.6,1);pointer-events:none}
+.peek.up{bottom:-26px}
+.popup{position:fixed;z-index:160;left:50%;top:40%;transform:translate(-50%,-50%);width:min(360px,92vw);background:var(--win);color:#000;
+  border:3px solid;border-color:#fff #000 #000 #fff;box-shadow:6px 6px 0 rgba(0,0,0,.5);font-family:"VT323",monospace;font-size:1.25rem;display:none}
+.popup.show{display:block;animation:pop .2s}
+.popup .body{display:flex;gap:.8rem;padding:1rem;align-items:center}
+.popup .body img{width:56px;height:56px;flex-shrink:0}
+.popup .actions{display:flex;justify-content:center;gap:.6rem;padding:0 1rem 1rem;position:relative;min-height:40px}
+.popup .w98btn{min-width:80px;height:30px;font-size:1.15rem;position:relative;transition:transform .15s}
+.trail{position:fixed;pointer-events:none;z-index:190;font-size:14px;animation:trail .7s linear forwards}
+@keyframes trail{to{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(90deg) scale(.4)}}
+.toast{position:fixed;left:50%;top:16px;transform:translate(-50%,-220%);background:var(--toxic);color:#000;font-family:var(--impact);text-transform:uppercase;
+  padding:.5rem 1rem;border:3px solid #000;box-shadow:4px 4px 0 #000;transition:.25s;z-index:170}
+.toast.show{transform:translate(-50%,0) rotate(-2deg)}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}
   .drift{display:none}
-  .reveal{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
 
-<!-- Reusable SVG shapes -->
+<!-- shared SVG bits -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <radialGradient id="padGrad" cx="45%" cy="40%" r="65%">
-      <stop offset="0" stop-color="#4fb366"/><stop offset=".7" stop-color="#2f8f4e"/><stop offset="1" stop-color="#1f6b38"/>
-    </radialGradient>
-    <radialGradient id="mirrorGrad" cx="35%" cy="30%" r="70%">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#cfd8dc"/><stop offset="1" stop-color="#7d8b91"/>
-    </radialGradient>
+    <radialGradient id="padGrad" cx="45%" cy="40%" r="65%"><stop offset="0" stop-color="#5cc46a"/><stop offset=".7" stop-color="#2f8f4e"/><stop offset="1" stop-color="#1f6b38"/></radialGradient>
+    <radialGradient id="mirrorGrad" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#cfd8dc"/><stop offset="1" stop-color="#7d8b91"/></radialGradient>
+    <filter id="boil"><feTurbulence id="boilT" type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
     <symbol id="lilypad" viewBox="0 0 100 100">
-      <path d="M50 50 L58 4 A46 46 0 1 1 42 4 Z" fill="url(#padGrad)" stroke="#164f2a" stroke-width="2"/>
-      <g stroke="#1f6b38" stroke-width="1.6" fill="none" opacity=".75" stroke-linecap="round">
-        <path d="M50 50 L20 24"/><path d="M50 50 L8 52"/><path d="M50 50 L20 80"/>
-        <path d="M50 50 L50 94"/><path d="M50 50 L80 80"/><path d="M50 50 L92 52"/><path d="M50 50 L80 24"/>
+      <path d="M50 50 L59 4 A46 46 0 1 1 41 4 Z" fill="url(#padGrad)" stroke="#000" stroke-width="3"/>
+      <g stroke="#1a5a2e" stroke-width="2" fill="none" stroke-linecap="round">
+        <path d="M50 50 L20 24"/><path d="M50 50 L8 52"/><path d="M50 50 L20 80"/><path d="M50 50 L50 94"/><path d="M50 50 L80 80"/><path d="M50 50 L92 52"/><path d="M50 50 L80 24"/>
       </g>
-      <ellipse cx="38" cy="34" rx="10" ry="5" fill="#fff" opacity=".12" transform="rotate(-30 38 34)"/>
     </symbol>
     <symbol id="lotus" viewBox="0 0 60 50">
-      <g stroke="#b8467a" stroke-width="1.2">
-        <path d="M30 44 C10 40 4 26 8 18 C18 22 26 32 30 44Z" fill="#f7a1c4"/>
-        <path d="M30 44 C50 40 56 26 52 18 C42 22 34 32 30 44Z" fill="#f7a1c4"/>
-        <path d="M30 44 C18 34 16 18 22 8 C30 16 32 30 30 44Z" fill="#fbc3da"/>
-        <path d="M30 44 C42 34 44 18 38 8 C30 16 28 30 30 44Z" fill="#fbc3da"/>
-        <path d="M30 44 C24 30 25 12 30 2 C35 12 36 30 30 44Z" fill="#ffe0ee"/>
+      <g stroke="#000" stroke-width="1.5">
+        <path d="M30 44 C10 40 4 26 8 18 C18 22 26 32 30 44Z" fill="#ff8fc8"/><path d="M30 44 C50 40 56 26 52 18 C42 22 34 32 30 44Z" fill="#ff8fc8"/>
+        <path d="M30 44 C18 34 16 18 22 8 C30 16 32 30 30 44Z" fill="#ffc1e0"/><path d="M30 44 C42 34 44 18 38 8 C30 16 28 30 30 44Z" fill="#ffc1e0"/>
+        <path d="M30 44 C24 30 25 12 30 2 C35 12 36 30 30 44Z" fill="#ffe6f3"/>
       </g>
-      <circle cx="30" cy="38" r="3" fill="#f5e66b"/>
     </symbol>
   </defs>
 </svg>
 
-<nav>
-  <a class="logo" href="#top" aria-label="Dr. Frogman home">
-    <svg viewBox="0 0 100 100"><use href="#lilypad"/></svg>
-    DR.FROGMAN
-  </a>
-  <ul>
-    <li><a href="#about">Patient File</a></li>
-    <li><a href="#schedule">Schedule</a></li>
-    <li><a href="#streams">Streams</a></li>
-    <li><a href="#lore">Lore</a></li>
-    <li><a href="#links">Join the Pond</a></li>
-  </ul>
+<div id="page">
+<!-- ============ WINDOW CHROME ============ -->
+<div class="titlebar">
+  <span class="t">🐸 dr_frogman_OFFICIAL_site(2)_FINAL_final.htm — Swamp Explorer 4.0</span>
+  <span class="winbtns"><button aria-label="minimize" data-err="min">_</button><button aria-label="maximize" data-err="max">□</button><button aria-label="close" data-err="close">X</button></span>
+</div>
+<nav class="menubar">
+  <a href="#about">File</a><a href="#emotes">Emotes</a><a href="#schedule">Shedule</a><a href="#streams">Streams</a><a href="#lore">Lore</a><a href="#links">Help (no)</a>
 </nav>
+<div class="marquee" aria-hidden="true"><div>
+  ⚠ WEBSITE MAINTAINED BY A FROG ⚠ o shit waddup ⚠ do NOT lick the screen ⚠ FeelsGoodMan ⚠ herons are NOT welcome ⚠ the doctor is in (the mud) ⚠ ribbit ribbit ribbit ⚠ this marquee is load-bearing ⚠ monkaS ⚠ 9/10 swamp doctors recommend being damp ⚠
+</div></div>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="stars" id="stars" aria-hidden="true"></div>
-  <div class="moon" aria-hidden="true"></div>
-
+  <img class="moon" id="moon" alt="" aria-hidden="true">
   <div class="treeline" aria-hidden="true">
-    <svg viewBox="0 0 1200 200" preserveAspectRatio="none" fill="currentColor">
-      <path d="M0 200 V120 Q30 60 60 110 Q80 40 110 100 Q140 20 170 95 Q190 70 210 105 Q240 30 280 100 Q300 80 320 110 Q350 10 390 95 Q420 60 440 105
-      Q470 40 510 100 Q540 70 560 110 Q600 20 640 95 Q660 75 690 108 Q720 30 760 98 Q790 60 820 106 Q850 15 890 96 Q910 80 940 110
-      Q970 35 1010 100 Q1040 65 1070 108 Q1100 25 1140 98 Q1170 70 1200 110 V200Z"/>
-    </svg>
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none" fill="currentColor"><path d="M0 200 V120 Q30 60 60 110 Q80 40 110 100 Q140 20 170 95 Q190 70 210 105 Q240 30 280 100 Q300 80 320 110 Q350 10 390 95 Q420 60 440 105 Q470 40 510 100 Q540 70 560 110 Q600 20 640 95 Q660 75 690 108 Q720 30 760 98 Q790 60 820 106 Q850 15 890 96 Q910 80 940 110 Q970 35 1010 100 Q1040 65 1070 108 Q1100 25 1140 98 Q1170 70 1200 110 V200Z"/></svg>
   </div>
-
   <div class="water" id="water" aria-hidden="true"></div>
-
-  <div class="reeds left" aria-hidden="true"><svg viewBox="0 0 120 260">
-    <g stroke="#1d4a2c" stroke-width="5" stroke-linecap="round" fill="none">
-      <path d="M30 260 Q28 150 40 40"/><path d="M60 260 Q66 160 58 70"/><path d="M85 260 Q90 180 104 100"/>
-      <path d="M15 260 Q4 200 10 150" stroke="#2c6b3d"/><path d="M45 260 Q40 210 20 180" stroke="#2c6b3d"/>
-    </g>
-    <g fill="#5a3b22"><rect x="34" y="40" width="12" height="46" rx="6"/><rect x="52" y="70" width="12" height="40" rx="6"/><rect x="97" y="96" width="11" height="36" rx="5"/></g>
-  </svg></div>
-  <div class="reeds right" aria-hidden="true"><svg viewBox="0 0 120 260">
-    <g stroke="#1d4a2c" stroke-width="5" stroke-linecap="round" fill="none">
-      <path d="M30 260 Q28 150 40 60"/><path d="M60 260 Q66 160 58 40"/><path d="M90 260 Q96 200 112 140" stroke="#2c6b3d"/>
-    </g>
-    <g fill="#5a3b22"><rect x="34" y="60" width="12" height="42" rx="6"/><rect x="52" y="40" width="12" height="48" rx="6"/></g>
-  </svg></div>
-
+  <div class="reeds left" aria-hidden="true"><svg viewBox="0 0 120 260"><g stroke="#000" stroke-width="7" stroke-linecap="round" fill="none"><path d="M30 260 Q28 150 40 40"/><path d="M60 260 Q66 160 58 70"/><path d="M85 260 Q90 180 104 100"/></g><g stroke="#2c6b3d" stroke-width="4" stroke-linecap="round" fill="none"><path d="M30 260 Q28 150 40 40"/><path d="M60 260 Q66 160 58 70"/><path d="M85 260 Q90 180 104 100"/></g><g fill="#6b4423" stroke="#000" stroke-width="2.5"><rect x="34" y="40" width="12" height="46" rx="6"/><rect x="52" y="70" width="12" height="40" rx="6"/><rect x="97" y="96" width="11" height="36" rx="5"/></g></svg></div>
+  <div class="reeds right" aria-hidden="true"><svg viewBox="0 0 120 260"><g stroke="#000" stroke-width="7" stroke-linecap="round" fill="none"><path d="M30 260 Q28 150 40 60"/><path d="M60 260 Q66 160 58 40"/></g><g stroke="#2c6b3d" stroke-width="4" stroke-linecap="round" fill="none"><path d="M30 260 Q28 150 40 60"/><path d="M60 260 Q66 160 58 40"/></g><g fill="#6b4423" stroke="#000" stroke-width="2.5"><rect x="34" y="60" width="12" height="42" rx="6"/><rect x="52" y="40" width="12" height="48" rx="6"/></g></svg></div>
   <div class="fireflies" id="fireflies" aria-hidden="true"></div>
 
-  <div class="frog-stage">
-    <div class="bubble" id="bubble">RIBBIT!</div>
-    <button class="frog-btn" id="frogBtn" aria-label="Boop Dr. Frogman to make him ribbit">
-      <svg id="frog" viewBox="0 0 300 260" aria-hidden="true">
-        <!-- back legs -->
-        <ellipse cx="55" cy="205" rx="48" ry="30" fill="#4f9a36"/>
-        <ellipse cx="245" cy="205" rx="48" ry="30" fill="#4f9a36"/>
-        <!-- body -->
-        <ellipse cx="150" cy="170" rx="108" ry="76" fill="#6cc04a"/>
-        <!-- eye bumps -->
-        <circle cx="92" cy="96" r="44" fill="#6cc04a"/>
-        <circle cx="208" cy="96" r="44" fill="#6cc04a"/>
-        <!-- spots -->
-        <g fill="#4f9a36" opacity=".8">
-          <circle cx="70" cy="150" r="9"/><circle cx="58" cy="175" r="6"/><circle cx="236" cy="152" r="10"/>
-          <circle cx="248" cy="178" r="5"/><circle cx="150" cy="118" r="5"/><circle cx="118" cy="128" r="4"/>
-        </g>
-        <!-- belly -->
-        <ellipse cx="150" cy="200" rx="68" ry="44" fill="#d4f29c"/>
-        <!-- throat pouch (shows when croaking) -->
-        <ellipse class="throat" cx="150" cy="186" rx="40" ry="26" fill="#f2f9c9" stroke="#b6e35a" stroke-width="3"/>
-        <!-- headband + head mirror -->
-        <path d="M58 82 Q150 40 242 82" stroke="#2b3a42" stroke-width="7" fill="none" stroke-linecap="round"/>
-        <circle cx="150" cy="60" r="26" fill="url(#mirrorGrad)" stroke="#2b3a42" stroke-width="4"/>
-        <circle cx="150" cy="60" r="6" fill="#2b3a42"/>
-        <path d="M136 50 Q142 44 150 44" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
-        <!-- eyes -->
-        <g class="eye">
-          <circle cx="92" cy="98" r="31" fill="#fffdf2"/>
-          <g class="pupil" data-cx="92" data-cy="98">
-            <ellipse cx="92" cy="98" rx="15" ry="17" fill="#0b1f19"/>
-            <circle cx="86" cy="91" r="5" fill="#fff"/>
+  <div class="stage">
+    <div class="live" id="live"><span class="dot"></span><span id="liveText">OFFLINE (napping in mud)</span></div>
+    <div class="meme top">here comes</div>
+
+    <div class="frogwrap">
+      <div class="bubble" id="bubble">o shit waddup</div>
+      <button class="frog-btn" id="frogBtn" aria-label="Poke Dr. Frogman">
+        <svg id="frog" viewBox="0 0 300 450" aria-hidden="true">
+          <!-- lily pad (no unicycle, he's walking now) -->
+          <ellipse cx="150" cy="424" rx="140" ry="26" fill="#000"/>
+          <path d="M150 418 L174 393 A136 25 0 1 1 126 393 Z" fill="url(#padGrad)" stroke="#000" stroke-width="5"/>
+          <g stroke="#1a5a2e" stroke-width="3" fill="none"><path d="M150 418 L40 410"/><path d="M150 418 L70 436"/><path d="M150 418 L150 442"/><path d="M150 418 L232 436"/><path d="M150 418 L262 410"/></g>
+          <use href="#lotus" x="236" y="378" width="52" height="44"/>
+          <g filter="url(#boil)">
+            <!-- legs -->
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M128 318 Q66 326 80 370 Q88 392 110 404" stroke="#000" stroke-width="30"/>
+              <path d="M172 318 Q234 326 220 370 Q212 392 190 404" stroke="#000" stroke-width="30"/>
+              <path d="M128 318 Q66 326 80 370 Q88 392 110 404" stroke="#5fbf3a" stroke-width="19"/>
+              <path d="M172 318 Q234 326 220 370 Q212 392 190 404" stroke="#5fbf3a" stroke-width="19"/>
+            </g>
+            <g fill="#5fbf3a" stroke="#000" stroke-width="5" stroke-linejoin="round">
+              <path d="M84 414 Q96 398 116 400 L140 410 Q130 418 118 416 L128 424 Q110 424 100 418 L96 426 Q86 422 84 414Z"/>
+              <path d="M216 414 Q204 398 184 400 L160 410 Q170 418 182 416 L172 424 Q190 424 200 418 L204 426 Q214 422 216 414Z"/>
+            </g>
+            <!-- right arm (down, sassy) -->
+            <g fill="none" stroke-linecap="round">
+              <path d="M196 214 Q240 248 226 296" stroke="#000" stroke-width="26"/>
+              <path d="M196 214 Q240 248 226 296" stroke="#5fbf3a" stroke-width="15"/>
+            </g>
+            <g fill="#5fbf3a" stroke="#000" stroke-width="4"><circle cx="214" cy="312" r="8"/><circle cx="228" cy="316" r="8"/><circle cx="241" cy="308" r="8"/><circle cx="226" cy="300" r="13"/></g>
+            <!-- body union (outline pass then fill pass) -->
+            <g fill="#5fbf3a" stroke="#000" stroke-width="11" stroke-linejoin="round">
+              <ellipse cx="150" cy="262" rx="62" ry="86"/><ellipse cx="150" cy="126" rx="104" ry="58"/><circle cx="96" cy="74" r="42"/><circle cx="204" cy="74" r="42"/>
+            </g>
+            <g fill="#5fbf3a">
+              <ellipse cx="150" cy="262" rx="62" ry="86"/><ellipse cx="150" cy="126" rx="104" ry="58"/><circle cx="96" cy="74" r="42"/><circle cx="204" cy="74" r="42"/>
+            </g>
+            <ellipse cx="150" cy="280" rx="42" ry="62" fill="#eef38a" stroke="#000" stroke-width="4"/>
+            <g fill="#3f8f26"><circle cx="70" cy="132" r="9"/><circle cx="232" cy="128" r="11"/><circle cx="246" cy="150" r="5"/><circle cx="120" cy="208" r="6"/><circle cx="186" cy="228" r="8"/></g>
+            <!-- head mirror band -->
+            <path d="M62 92 Q150 30 238 92" stroke="#222" stroke-width="7" fill="none"/>
+            <!-- eyes -->
+            <circle cx="96" cy="72" r="32" fill="#fff" stroke="#000" stroke-width="5"/>
+            <circle cx="204" cy="72" r="32" fill="#fff" stroke="#000" stroke-width="5"/>
+            <g class="pupil" data-cx="96" data-cy="72" data-dir="1"><circle cx="96" cy="72" r="9"/><circle cx="93" cy="69" r="3" fill="#fff"/></g>
+            <g class="pupil" data-cx="204" data-cy="72" data-dir="-1"><circle cx="204" cy="72" r="6"/></g>
+            <circle cx="150" cy="56" r="22" fill="url(#mirrorGrad)" stroke="#000" stroke-width="5"/>
+            <circle cx="150" cy="56" r="5"/>
+            <!-- grin -->
+            <path d="M60 128 Q150 214 240 128" stroke="#000" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M54 122 Q58 134 68 134" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M246 122 Q242 134 232 134" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <circle cx="138" cy="118" r="3"/><circle cx="162" cy="118" r="3"/>
+            <ellipse cx="62" cy="152" rx="14" ry="7" fill="#ff8fc8" opacity=".7"/>
+            <!-- stethoscope -->
+            <path d="M112 178 Q110 230 150 238 Q190 230 188 178" stroke="#222" stroke-width="6" fill="none"/>
+            <circle cx="150" cy="242" r="11" fill="url(#mirrorGrad)" stroke="#000" stroke-width="4"/>
+            <!-- waving arm -->
+            <g class="arm-wave">
+              <g fill="none" stroke-linecap="round">
+                <path d="M104 214 Q58 200 52 142" stroke="#000" stroke-width="26"/>
+                <path d="M104 214 Q58 200 52 142" stroke="#5fbf3a" stroke-width="15"/>
+              </g>
+              <g fill="#5fbf3a" stroke="#000" stroke-width="4"><circle cx="36" cy="114" r="8"/><circle cx="52" cy="106" r="8"/><circle cx="68" cy="112" r="8"/><circle cx="52" cy="128" r="14"/></g>
+            </g>
           </g>
-        </g>
-        <g class="eye">
-          <circle cx="208" cy="98" r="31" fill="#fffdf2"/>
-          <g class="pupil" data-cx="208" data-cy="98">
-            <ellipse cx="208" cy="98" rx="15" ry="17" fill="#0b1f19"/>
-            <circle cx="202" cy="91" r="5" fill="#fff"/>
-          </g>
-        </g>
-        <!-- cheeks -->
-        <ellipse cx="78" cy="160" rx="16" ry="9" fill="#f7a1c4" opacity=".6"/>
-        <ellipse cx="222" cy="160" rx="16" ry="9" fill="#f7a1c4" opacity=".6"/>
-        <!-- mouth -->
-        <path d="M92 152 Q150 196 208 152" stroke="#1f4d1e" stroke-width="5" fill="none" stroke-linecap="round"/>
-        <!-- nostrils -->
-        <circle cx="140" cy="140" r="2.5" fill="#1f4d1e"/><circle cx="160" cy="140" r="2.5" fill="#1f4d1e"/>
-        <!-- stethoscope -->
-        <path d="M98 168 Q100 222 150 226 Q200 222 202 168" stroke="#2b3a42" stroke-width="5" fill="none" stroke-linecap="round"/>
-        <path d="M176 224 Q186 240 196 236" stroke="#2b3a42" stroke-width="5" fill="none" stroke-linecap="round"/>
-        <circle cx="202" cy="236" r="10" fill="url(#mirrorGrad)" stroke="#2b3a42" stroke-width="3"/>
-        <!-- front feet -->
-        <g fill="#5aab3c">
-          <ellipse cx="102" cy="240" rx="26" ry="12"/><ellipse cx="198" cy="244" rx="26" ry="12"/>
-          <circle cx="80" cy="244" r="6"/><circle cx="96" cy="250" r="6"/><circle cx="114" cy="250" r="6"/>
-          <circle cx="182" cy="252" r="6"/><circle cx="200" cy="254" r="6"/><circle cx="220" cy="248" r="6"/>
-        </g>
-      </svg>
-    </button>
-    <svg class="pad-under" viewBox="0 0 200 70" aria-hidden="true">
-      <ellipse cx="100" cy="40" rx="96" ry="26" fill="#0a2520" opacity=".45"/>
-      <path d="M100 34 L114 3 A96 31 0 1 1 86 3 Z" fill="url(#padGrad)" stroke="#164f2a" stroke-width="2"/>
-      <g stroke="#1f6b38" stroke-width="1.5" fill="none" opacity=".7" stroke-linecap="round">
-        <path d="M100 34 L30 18"/><path d="M100 34 L8 38"/><path d="M100 34 L40 60"/><path d="M100 34 L100 65"/>
-        <path d="M100 34 L160 60"/><path d="M100 34 L192 38"/><path d="M100 34 L170 18"/>
-      </g>
-      <use href="#lotus" x="160" y="6" width="34" height="28"/>
-    </svg>
+        </svg>
+      </button>
+    </div>
+
+    <h1 class="meme glitch" data-text="D R . F R O G M A N" aria-label="Dr. Frogman">D R . F R O G M A N</h1>
+    <div class="btnrow">
+      <a class="btn" href="#links">join the pond</a>
+      <a class="btn" href="#emotes">steal emotes</a>
+    </div>
+    <p class="counter">frog poked <b id="count">0</b> times · he does not consent · poke him</p>
   </div>
 
-  <div class="hero-content">
-    <div class="live" id="live"><span class="dot"></span><span id="liveText">Currently: napping in the mud (offline)</span></div>
-    <h1 class="title" aria-label="Dr. Frogman" id="title"></h1>
-    <p class="tagline">The swamp's least-licensed physician<small>*</small>. Streaming games, chaos &amp; ribbits straight from the bog.<br><small>*not licensed. please do not take medical advice from a frog.</small></p>
-    <div class="cta">
-      <a class="btn primary" href="#links">🪷 Join the Pond</a>
-      <a class="btn secondary" href="#schedule">📅 Stream Schedule</a>
-    </div>
-    <p class="counter">Ribbits given by visitors: <b id="count">0</b> &nbsp;·&nbsp; tap the frog</p>
-  </div>
+  <aside class="chat" aria-label="Fake stream chat">
+    <header>stream chat <span>● LIVE-ISH</span></header>
+    <div class="msgs" id="msgs"></div>
+    <form class="fakein" id="chatForm"><input id="chatIn" placeholder="Send a message" maxlength="80" aria-label="Chat message"><button>Chat</button></form>
+  </aside>
 </header>
+
+<div class="hazard"><span>UNDER CONSTRUCTION (FOREVER)</span></div>
 
 <!-- ============ ABOUT ============ -->
 <section id="about">
-  <svg class="wave-top" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 V30 Q150 0 300 30 T600 30 T900 30 T1200 30 V60Z" fill="#12392f"/></svg>
-  <div class="wrap about-grid">
-    <div class="about-text reveal">
-      <span class="kicker">🐸 Who's that frog</span>
-      <h2>Meet the Doctor of the Swamp</h2>
-      <p>Deep in the fog where the cattails whisper, there's a lily pad clinic with a single flickering lantern. The sign outside reads <b>“DR. FROGMAN — Walk-ins Welcome — No Herons.”</b></p>
-      <p>Armed with a head mirror he found in a drainage pipe and a stethoscope he absolutely did not steal, Dr. Frogman diagnoses everything as “a bit damp” and prescribes the same cure every time: <b>vibes, flies, and one more game.</b></p>
-      <p>When he's not hopping between pads, he streams — co-op chaos, cozy swamp nights, and the occasional deeply questionable karaoke ribbit.</p>
-    </div>
-    <div class="chart reveal" role="group" aria-label="Patient file">
-      <h3>PATIENT FILE <small>#0-RIBBIT</small></h3>
-      <dl>
-        <dt>Name</dt><dd>D R . F R O G M A N</dd>
-        <dt>Species</dt><dd>Swamp Frog (self-awarded PhD)</dd>
-        <dt>Habitat</dt><dd>The Bog, Pad #7 (the big one)</dd>
-        <dt>Height</dt><dd>About 3 lily pads, sitting</dd>
-        <dt>Likes</dt><dd>Flies 🪰, rainstorms, co-op games, lotus flowers, chat</dd>
-        <dt>Dislikes</dt><dd>Herons, salt, droughts, being called a toad</dd>
-        <dt>Diagnosis</dt><dd>Chronically moist. Terminally silly.</dd>
-      </dl>
-      <span class="stamp">CERTIFIED DAMP</span>
+  <div class="wrap">
+    <h2><s>About</s> Abuot me</h2><span class="scribble">← spelled it wrong, leaving it</span>
+    <div class="about-grid">
+      <div>
+        <div class="note">
+          <p>hello. it is i. <mark>D R . F R O G M A N</mark>. i live on a lily pad in a swamp that smells like <s>pennies</s> <s>soup</s> wet.</p>
+          <p>i am a doctor. i have a <s>degree</s> head mirror. i found the stethoscope in a heron's nest. the heron no longer needs it.</p>
+          <p>i stream games, yell at chat, and sometimes just sit there like this: FeelsGoodMan. my unicycle was repossessed so now i walk everywhere. it is going fine. it is not going fine.</p>
+        </div>
+        <div class="broken">dr_frogman_selfie_REAL_final2.png</div>
+      </div>
+      <div class="chart" role="group" aria-label="Patient file">
+        <div class="titlebar"><span class="t">patient_file.txt</span><span class="winbtns"><button aria-label="close" data-err="close">X</button></span></div>
+        <dl>
+          <dt>NAME:</dt><dd>D R . F R O G M A N</dd>
+          <dt>SPECIES:</dt><dd>frog (confirmed by frog)</dd>
+          <dt>HABITAT:</dt><dd>pad #7, the big one</dd>
+          <dt>TRANSPORT:</dt><dd><s>unicycle</s> legs :(</dd>
+          <dt>LIKES:</dt><dd>flies, rain, co-op, chat</dd>
+          <dt>DISLIKES:</dt><dd>herons, salt, the sun</dd>
+          <dt>BLOOD TYPE:</dt><dd>swamp water</dd>
+          <dt>DIAGNOSIS:</dt><dd>monkaS (terminal)</dd>
+        </dl>
+        <span class="stamp">NOT A REAL DOCTOR</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ============ EMOTES ============ -->
+<section id="emotes">
+  <div class="wrap">
+    <h2>Emote Pond</h2><span class="scribble">tribute to the greatest frog of all time 🫡</span>
+    <div class="emote-pond" id="emotePond"></div>
+    <p class="emote-tip">click an emote to copy its name. spam them in chat. the doctor insists.</p>
+  </div>
+</section>
+
+<div class="hazard"><span>CAUTION: WET FLOOR (IT'S A SWAMP)</span></div>
+
 <!-- ============ SCHEDULE ============ -->
 <section id="schedule">
   <div class="wrap">
-    <div class="reveal">
-      <span class="kicker">📅 Office hours</span>
-      <h2>Weekly Lily Pad Schedule</h2>
-    </div>
-    <div class="pond reveal" id="pond"></div>
-    <p class="tz reveal">Times shown in <b id="tzName">your local time</b>. Schedule may shift when it rains (it's a swamp, it always rains).</p>
+    <h2>Stream Shedule</h2><span class="scribble">(subject to frog)</span>
+    <div class="pond" id="pond"></div>
+    <p class="tz">times are in <b id="tzName">your local time</b>. if i'm late assume a heron got me.</p>
   </div>
 </section>
 
 <!-- ============ STREAMS ============ -->
 <section id="streams">
   <div class="wrap">
-    <div class="reveal">
-      <span class="kicker">🎮 What happens on stream</span>
-      <h2>Treatments Offered</h2>
-    </div>
-    <div class="cards">
-      <div class="card reveal"><div class="ico">🎮</div><h3>Bog-Standard Gaming</h3><p>Steam library deep-dives, co-op chaos with the pond, and rage games that test a frog's patience.</p></div>
-      <div class="card reveal"><div class="ico">🩺</div><h3>Swamp Clinic</h3><p>Chat brings their “symptoms.” The Doctor gives completely unqualified, deeply froggy advice.</p></div>
-      <div class="card reveal"><div class="ico">🌧️</div><h3>Cozy Rain Nights</h3><p>Rain sounds, lo-fi croaks, cozy games and just hanging out on the pad with the tadpoles.</p></div>
-      <div class="card reveal"><div class="ico">🎤</div><h3>Karaoke Ribbits</h3><p>The full chorus. Every song is better when it's 40% ribbit. This is not up for debate.</p></div>
+    <h2>What Happens On Stream</h2>
+    <div class="cards" id="cards">
+      <div class="card" style="--r:-2deg" data-e="ez"><h3>Gaming (Bad)</h3><p>steam library deep-dives, co-op chaos, rage games. i will lose. chat will spam EZ. this is the circle of life.</p></div>
+      <div class="card" style="--r:1.5deg" data-e="doc"><h3>Swamp Clinic</h3><p>tell me your symptoms. i will tell you that you are “a bit damp”. that's $0. please do not take advice from a frog.</p></div>
+      <div class="card" style="--r:-1deg" data-e="sadge"><h3>Rain Nights</h3><p>cozy games, rain sounds, existential croaking at 2am. Sadge but in a nice way.</p></div>
+      <div class="card" style="--r:2.5deg" data-e="pepega"><h3>Karaoke Ribbits</h3><p>every song but 40% ribbit. the neighbors have filed complaints. the neighbors are herons. ignored.</p></div>
     </div>
   </div>
 </section>
@@ -445,14 +472,11 @@ footer .lotus-row svg{width:40px;height:40px}
 <!-- ============ LORE ============ -->
 <section id="lore">
   <div class="wrap">
-    <div class="reveal" style="text-align:center">
-      <span class="kicker">📜 Swamp lore</span>
-      <h2>The Legend of the Frogman</h2>
-    </div>
+    <h2>The Lore (Real)</h2>
     <div class="lore">
-      <article class="reveal"><h3>The Tadpole Years</h3><p>Born in a puddle no bigger than a teacup, a tiny tadpole spent his days watching the old heron-doctor of the marsh patch up turtles. He took notes. In mud. They washed away. He kept going anyway.</p></article>
-      <article class="reveal"><h3>The Great Drought</h3><p>When the swamp began to dry, it was a young frog with a shiny mirror on his head who hopped pad to pad, keeping everyone hydrated and entertained. The swamp folk started calling him <i>Doctor</i>. He did not correct them.</p></article>
-      <article class="reveal"><h3>The Glowing Rectangle</h3><p>One night a firefly-lit screen washed up in the reeds. The Doctor discovered he could broadcast his clinic to the whole world. The pond grew. The ribbits grew louder. The rest is history (still being written, live, most nights).</p></article>
+      <article style="--r:-1deg"><h3>origin.txt</h3><p>born in a puddle the size of a teacup. watched the old heron doctor patch up turtles. took notes in mud. notes washed away. kept going anyway.</p></article>
+      <article style="--r:1.2deg"><h3>the_unicycle_incident.txt</h3><p>legend says he once rode a single wheel across the whole swamp. the wheel is gone now. nobody talks about it. if you ask, he just whispers “o shit waddup” and stares at the moon.</p></article>
+      <article style="--r:-.6deg"><h3>glowing_rectangle.txt</h3><p>a laptop washed up in the reeds. it had a webcam. it had a stream button. it had no idea what was coming<span class="cursor"></span></p></article>
     </div>
   </div>
 </section>
@@ -460,49 +484,52 @@ footer .lotus-row svg{width:40px;height:40px}
 <!-- ============ LINKS ============ -->
 <section id="links">
   <div class="wrap">
-    <div class="reveal">
-      <span class="kicker">🪷 Hop on over</span>
-      <h2>Join the Pond</h2>
-      <p style="color:var(--muted)">Every lily pad leads somewhere. Pick one and hop.</p>
-    </div>
+    <h2>Join The Pond</h2><br>
     <!-- ✏️ Replace each href="#" with your real profile links -->
-    <div class="socials reveal">
-      <a class="social" href="#" target="_blank" rel="noopener"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span><em>💜</em>Twitch</span></a>
-      <a class="social" href="#" target="_blank" rel="noopener"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span><em>▶️</em>YouTube</span></a>
-      <a class="social" href="#" target="_blank" rel="noopener"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span><em>🎮</em>Steam</span></a>
-      <a class="social" href="#" target="_blank" rel="noopener"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span><em>💬</em>Discord</span></a>
-      <a class="social" href="#" target="_blank" rel="noopener"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span><em>🐦</em>Socials</span></a>
+    <div class="socials" id="socials">
+      <a class="social" style="--r:-6deg" href="#" target="_blank" rel="noopener" data-e="good"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>twitch</span></a>
+      <a class="social" style="--r:4deg"  href="#" target="_blank" rel="noopener" data-e="laugh"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>youtube</span></a>
+      <a class="social" style="--r:-3deg" href="#" target="_blank" rel="noopener" data-e="ez"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>steam</span></a>
+      <a class="social" style="--r:7deg"  href="#" target="_blank" rel="noopener" data-e="clap"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>discord</span></a>
+      <a class="social" style="--r:-5deg" href="#" target="_blank" rel="noopener" data-e="smug"><svg class="padbg" viewBox="0 0 100 100"><use href="#lilypad"/></svg><span>socials</span></a>
     </div>
-    <button class="steam-name reveal" id="steamName" title="Copy Steam name">D R . F R O G M A N &nbsp;📋</button>
-    <p style="color:var(--muted);font-size:.85rem;margin-top:.5rem">Add me on Steam — tap to copy the name</p>
+    <button class="steam-name" id="steamName" title="Copy Steam name">D R . F R O G M A N 📋</button>
+    <p style="color:#dfffb0;margin-top:.5rem;font-size:.9rem">add me on steam. tap to copy. i will accept. probably.</p>
   </div>
 </section>
 
 <footer>
-  <div class="lotus-row" aria-hidden="true">
-    <svg viewBox="0 0 60 50"><use href="#lotus"/></svg><svg viewBox="0 0 60 50"><use href="#lotus"/></svg><svg viewBox="0 0 60 50"><use href="#lotus"/></svg>
-  </div>
-  <p>© <span id="yr"></span> D R . F R O G M A N · Hop responsibly · No herons were harmed in the making of this website.</p>
+  <div>YOU ARE VISITOR NUMBER</div>
+  <div class="hits" id="hits"></div>
+  <div>best viewed in Swamp Explorer 4.0 at 640×480 · © <span id="yr"></span> D R . F R O G M A N · no herons were harmed (some were)</div>
+  <div class="badges"><span>MADE WITH NOTEPAD</span><span>FROG POWERED</span><span>NO UNICYCLES</span><span>Y2K COMPLIANT?</span></div>
 </footer>
+</div><!-- /#page -->
 
+<button class="fry" id="fry">deep fry 🔥</button>
+<img class="peek" id="peek" alt="" aria-hidden="true">
+<div class="popup" id="popup" role="alertdialog" aria-labelledby="popMsg">
+  <div class="titlebar"><span class="t">swamp.exe</span><span class="winbtns"><button aria-label="close" id="popX">X</button></span></div>
+  <div class="body"><img id="popImg" alt=""><p id="popMsg">swamp.exe has encountered a frog.</p></div>
+  <div class="actions"><button class="w98btn" id="popOk">OK</button><button class="w98btn" id="popRibbit">ribbit</button></div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* ===================== EASY CONFIG ===================== */
 const CONFIG = {
-  isLive: false,                       // flip to true when you're streaming
-  liveText: "LIVE NOW — the clinic is open!",
-  offlineText: "Currently: napping in the mud (offline)",
-  // Schedule times are in the timezone below; visitors see them converted to their local time.
-  timezone: "America/New_York",
+  isLive: false,                              // flip to true when you're streaming
+  liveText: "LIVE NOW!!! GET IN HERE",
+  offlineText: "OFFLINE (napping in mud)",
+  timezone: "America/New_York",               // times below are in this zone; visitors see their local time
   schedule: [
-    { day:"Mon", time:"19:00", what:"Swamp Clinic & Chat" },
-    { day:"Tue", off:true,     what:"Resting in the mud" },
-    { day:"Wed", time:"20:00", what:"Bog-Standard Gaming" },
-    { day:"Thu", time:"20:00", what:"Co-op with the Pond" },
-    { day:"Fri", time:"21:00", what:"Rage Game Fridays" },
-    { day:"Sat", time:"15:00", what:"Long Lily Pad Stream" },
-    { day:"Sun", time:"18:00", what:"Cozy Rain Night" }
+    { day:"Mon", time:"19:00", what:"Swamp Clinic" },
+    { day:"Tue", off:true,     what:"mud nap. do not disturb" },
+    { day:"Wed", time:"20:00", what:"Gaming (Bad)" },
+    { day:"Thu", time:"20:00", what:"Co-op w/ the pond" },
+    { day:"Fri", time:"21:00", what:"Rage Game Friday monkaS" },
+    { day:"Sat", time:"15:00", what:"Long Pad Stream" },
+    { day:"Sun", off:true,     what:"whenever lol" }
   ]
 };
 /* ======================================================= */
@@ -510,159 +537,254 @@ const CONFIG = {
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = s => document.querySelector(s);
 const rand = (a,b) => a + Math.random()*(b-a);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const NAME = "D R . F R O G M A N";
 
-// Title letters
-const name = "D R . F R O G M A N";
-$("#title").innerHTML = name.split(" ").map(ch =>
-  `<span aria-hidden="true" style="${ch==='.'?'color:var(--lotus)':''}">${ch}</span>`).join("");
+/* ---------- EMOTES (original frog-face drawings, tribute-style) ---------- */
+const G="#5aa83a", O="#10240c", LIP="#c45a4c";
+function face(o={}){
+  const {eyes="open",mouth="smile",extra=[],pupil=[0,0],wide=false,lidRot=0,lidDrop=0}=o;
+  const base=`<ellipse cx="50" cy="60" rx="40" ry="30"/><circle cx="32" cy="36" r="17"/><circle cx="68" cy="36" r="17"/>`;
+  let s=`<g fill="${G}" stroke="${O}" stroke-width="6">${base}</g><g fill="${G}">${base}</g>`;
+  if(extra.includes("mirror")) s+=`<path d="M18 30 Q50 6 82 30" stroke="#222" stroke-width="3" fill="none"/><circle cx="50" cy="18" r="9" fill="#dfe6e9" stroke="${O}" stroke-width="2.5"/><circle cx="50" cy="18" r="2.5" fill="${O}"/>`;
+  const eye=(cx,side)=>{
+    const cy=37;
+    if(eyes==="happy") return `<path d="M${cx-11} ${cy+3} Q${cx} ${cy-9} ${cx+11} ${cy+3}" stroke="${O}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+    const big=eyes==="wide";
+    let px=pupil[0], py=pupil[1];
+    if(eyes==="crossed") px = side<0 ? 5 : -5;
+    let e=`<ellipse cx="${cx}" cy="${cy}" rx="${big?14:13}" ry="${big?13:11}" fill="#fff" stroke="${O}" stroke-width="2.5"/>`;
+    e+=`<circle cx="${cx+2*side*0+px}" cy="${cy+1+py}" r="${big||eyes==="crossed"?2.6:4.6}" fill="${O}"/>`;
+    if(eyes==="lids") e+=`<path d="M${cx-13} ${cy} A13 11 0 0 1 ${cx+13} ${cy} Z" fill="${G}" stroke="${O}" stroke-width="2.5" transform="translate(0 ${lidDrop}) rotate(${lidRot*side} ${cx} ${cy})"/>`;
+    return e;
+  };
+  if(eyes==="shades") s+=`<path d="M14 29 H86 V35 Q84 48 70 48 Q57 48 55 37 H45 Q43 48 30 48 Q16 48 14 35Z" fill="#111" stroke="${O}" stroke-width="2"/><path d="M20 33 L28 33" stroke="#fff" stroke-width="2"/><path d="M60 33 L68 33" stroke="#fff" stroke-width="2"/>`;
+  else s+=eye(32,-1)+eye(68,1);
+  const M={
+    smile:`<path d="M22 64 Q50 86 78 64 Q50 76 22 64Z" fill="${LIP}" stroke="${O}" stroke-width="2.5"/>`,
+    frown:`<path d="M28 77 Q50 62 72 77 Q50 69 28 77Z" fill="${LIP}" stroke="${O}" stroke-width="2.5"/>`,
+    flat:`<path d="M30 71 Q50 67 70 71 Q50 76 30 71Z" fill="${LIP}" stroke="${O}" stroke-width="2.5"/>`,
+    open:`<path d="M26 63 Q50 98 74 63 Q50 70 26 63Z" fill="#5a1616" stroke="${O}" stroke-width="2.5"/><path d="M34 66 Q50 70 66 66 L64 71 Q50 74 36 71Z" fill="#fff"/>`,
+    smirk:`<path d="M34 72 Q56 74 74 61 Q58 80 34 72Z" fill="${LIP}" stroke="${O}" stroke-width="2.5"/>`,
+    shout:`<ellipse cx="50" cy="73" rx="17" ry="13" fill="#5a1616" stroke="${LIP}" stroke-width="5"/><ellipse cx="50" cy="73" rx="19.5" ry="15.5" fill="none" stroke="${O}" stroke-width="1.5"/>`
+  };
+  s+=M[mouth]||"";
+  if(extra.includes("blush")) s+=`<ellipse cx="20" cy="58" rx="7" ry="4" fill="#ff8fc8" opacity=".8"/><ellipse cx="80" cy="58" rx="7" ry="4" fill="#ff8fc8" opacity=".8"/>`;
+  if(extra.includes("tear")) s+=`<path d="M22 46 Q17 57 22 61 Q27 57 22 46Z" fill="#7cc8ff" stroke="#1d5f91" stroke-width="1.5"/>`;
+  if(extra.includes("streams")) s+=`<path d="M24 46 V92" stroke="#7cc8ff" stroke-width="6" opacity=".9"/><path d="M76 46 V92" stroke="#7cc8ff" stroke-width="6" opacity=".9"/>`;
+  if(extra.includes("sweat")) s+=`<path d="M86 10 Q78 24 86 28 Q94 24 86 10Z" fill="#7cc8ff" stroke="#1d5f91" stroke-width="2"/>`;
+  if(extra.includes("hands")) s+=`<g fill="${G}" stroke="${O}" stroke-width="2.5"><ellipse cx="30" cy="86" rx="15" ry="10"/><ellipse cx="70" cy="86" rx="15" ry="10"/></g><path d="M22 82 v6 M30 80 v8 M78 82 v6 M70 80 v8" stroke="${O}" stroke-width="1.5"/>`;
+  if(extra.includes("clap")) s+=`<g fill="${G}" stroke="${O}" stroke-width="2.5"><ellipse cx="44" cy="88" rx="9" ry="12" transform="rotate(-20 44 88)"/><ellipse cx="56" cy="88" rx="9" ry="12" transform="rotate(20 56 88)"/></g><path d="M34 76 l-6 -4 M66 76 l6 -4 M50 72 v-5" stroke="#fff35c" stroke-width="2.5" stroke-linecap="round"/>`;
+  if(extra.includes("mask")) s+=`<rect x="32" y="60" width="36" height="22" rx="9" fill="#dfe6e9" stroke="${O}" stroke-width="2.5"/><path d="M68 72 Q92 78 94 99" stroke="#8fa3a8" stroke-width="5" fill="none"/><text x="50" y="75" font-size="7" text-anchor="middle" font-family="Arial" font-weight="bold" fill="${O}">COPE</text>`;
+  if(extra.includes("hand")) s+=`<g fill="${G}" stroke="${O}" stroke-width="2.5"><ellipse cx="86" cy="70" rx="9" ry="13"/></g>`;
+  const wrap = wide ? `<g transform="translate(-14 14) scale(1.28 .72)">${s}</g>` : s;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">${wrap}</svg>`;
+}
+const EMOTES = {
+  good:  {name:"FeelsGoodMan",   opts:{eyes:"happy",mouth:"smile"}},
+  bad:   {name:"FeelsBadMan",    opts:{eyes:"lids",mouth:"frown",lidRot:14,extra:["tear"]}},
+  monka: {name:"monkaS",         opts:{eyes:"wide",mouth:"flat",extra:["sweat"]}},
+  hands: {name:"PepeHands",      opts:{eyes:"lids",mouth:"frown",lidRot:16,extra:["streams","hands"]}},
+  laugh: {name:"PepeLaugh",      opts:{eyes:"happy",mouth:"open",extra:["tear"]}},
+  sadge: {name:"Sadge",          opts:{eyes:"lids",mouth:"frown",lidRot:22,lidDrop:2,pupil:[0,3]}},
+  smug:  {name:"pepeSmug",       opts:{eyes:"lids",mouth:"smirk",lidDrop:3,pupil:[4,2]}},
+  copium:{name:"COPIUM",         opts:{eyes:"lids",mouth:"",lidRot:10,lidDrop:2,extra:["mask"]}},
+  ez:    {name:"EZ",             opts:{eyes:"shades",mouth:"smirk"}},
+  wide:  {name:"widepeepoHappy", opts:{eyes:"happy",mouth:"smile",wide:true,extra:["blush"]}},
+  pepega:{name:"Pepega",         opts:{eyes:"crossed",mouth:"shout",extra:["hand"]}},
+  clap:  {name:"peepoClap",      opts:{eyes:"happy",mouth:"smile",extra:["clap","blush"]}},
+  doc:   {name:"frogmanDoc",     opts:{eyes:"open",mouth:"smile",extra:["mirror","blush"]}}
+};
+const uri = svg => "data:image/svg+xml,"+encodeURIComponent(svg);
+for (const k in EMOTES) EMOTES[k].src = uri(face(EMOTES[k].opts));
+const byName = Object.fromEntries(Object.values(EMOTES).map(e=>[e.name,e]));
+const emoteImg = (k,cls="") => `<img src="${EMOTES[k].src}" alt="${EMOTES[k].name}" title="${EMOTES[k].name}" ${cls}>`;
 
-// Live badge
-const live = $("#live");
-live.classList.toggle("on", CONFIG.isLive);
+// Emote Pond
+const ep=$("#emotePond");
+Object.keys(EMOTES).forEach((k,i)=>{
+  const b=document.createElement("button"); b.className="emote"; b.style.setProperty("--r",(i*47%60-30)+"deg");
+  b.innerHTML=`<svg class="padbg" viewBox="0 0 100 100" aria-hidden="true"><use href="#lilypad"/></svg>${emoteImg(k)}<span>${EMOTES[k].name}</span>`;
+  b.addEventListener("click",()=>copy(EMOTES[k].name, `copied ${EMOTES[k].name}`));
+  ep.appendChild(b);
+});
+// emotes on cards + social pads
+document.querySelectorAll("[data-e]").forEach(el=>{
+  const k=el.dataset.e;
+  if(el.classList.contains("social")) el.querySelector("span").insertAdjacentHTML("afterbegin",emoteImg(k));
+  else el.insertAdjacentHTML("afterbegin",emoteImg(k));
+});
+$("#moon").src=EMOTES.bad.src;
+$("#popImg").src=EMOTES.monka.src;
+$("#peek").src=EMOTES.sadge.src;
+
+/* ---------- live badge ---------- */
+$("#live").classList.toggle("on",CONFIG.isLive);
 $("#liveText").textContent = CONFIG.isLive ? CONFIG.liveText : CONFIG.offlineText;
 
-// Stars
-const stars = $("#stars");
-for (let i=0;i<60;i++){
-  const s=document.createElement("i");
-  s.style.left=rand(0,100)+"%"; s.style.top=rand(0,100)+"%";
-  s.style.animationDelay=rand(0,3)+"s"; const z=rand(1,2.6); s.style.width=s.style.height=z+"px";
-  stars.appendChild(s);
-}
-
-// Fireflies
-const ff = $("#fireflies");
-for (let i=0;i<22;i++){
-  const f=document.createElement("i");
-  f.style.left=rand(2,98)+"%"; f.style.top=rand(25,85)+"%";
-  f.style.setProperty("--d", rand(7,14)+"s"); f.style.setProperty("--delay", -rand(0,10)+"s");
-  ff.appendChild(f);
-}
-
-// Drifting lily pads + lotuses on the water
-const water = $("#water");
-function addDrifter(initial){
+/* ---------- swamp scenery ---------- */
+const stars=$("#stars");
+for(let i=0;i<50;i++){const s=document.createElement("i");s.style.left=rand(0,100)+"%";s.style.top=rand(0,100)+"%";s.style.animationDelay=rand(0,2.4)+"s";stars.appendChild(s);}
+const ff=$("#fireflies");
+for(let i=0;i<18;i++){const f=document.createElement("i");f.style.left=rand(2,98)+"%";f.style.top=rand(25,85)+"%";f.style.setProperty("--d",rand(6,12)+"s");f.style.setProperty("--delay",-rand(0,10)+"s");ff.appendChild(f);}
+const water=$("#water");
+if(!reduce) for(let i=0;i<14;i++){
   const d=document.createElement("div"); d.className="drift";
-  const size=rand(50,140);
-  d.style.width=size+"px";
-  d.style.top=rand(5,85)+"%";
-  const dur=rand(40,90);
-  d.style.animationDuration=dur+"s";
-  d.style.animationDelay=(initial? -rand(0,dur) : 0)+"s";
-  d.style.setProperty("--spin", rand(-80,80)+"deg");
-  const hasLotus=Math.random()<.35;
-  d.innerHTML=`<svg viewBox="0 0 100 100" style="transform:scaleY(.45)"><use href="#lilypad"/>${
-    hasLotus?'<use href="#lotus" x="25" y="10" width="50" height="45" transform="scale(1 2.1) translate(0 -18)"/>':''}</svg>`;
+  const size=rand(50,130), dur=rand(30,80);
+  d.style.width=size+"px"; d.style.top=rand(5,80)+"%";
+  d.style.animationDuration=dur+"s"; d.style.animationDelay=-rand(0,dur)+"s"; d.style.setProperty("--spin",rand(-120,120)+"deg");
+  if(Math.random()<.25){ d.innerHTML=`<img src="${pick(Object.values(EMOTES)).src}" alt="">`; d.style.width=size*.6+"px"; }
+  else d.innerHTML=`<svg viewBox="0 0 100 100" style="transform:scaleY(.45)"><use href="#lilypad"/>${Math.random()<.35?'<use href="#lotus" x="25" y="10" width="50" height="45" transform="scale(1 2.1) translate(0 -18)"/>':''}</svg>`;
   water.appendChild(d);
 }
-if(!reduce) for(let i=0;i<14;i++) addDrifter(true);
-
-// Ripples on water click
-water.addEventListener("pointerdown", e=>{
+water.addEventListener("pointerdown",e=>{
   const r=water.getBoundingClientRect();
-  for(let k=0;k<2;k++){
-    const rp=document.createElement("span"); rp.className="ripple";
-    rp.style.left=(e.clientX-r.left)+"px"; rp.style.top=(e.clientY-r.top)+"px";
-    rp.style.animationDelay=k*.25+"s";
-    water.appendChild(rp); setTimeout(()=>rp.remove(),1800);
-  }
+  for(let k=0;k<2;k++){const rp=document.createElement("span");rp.className="ripple";rp.style.left=(e.clientX-r.left)+"px";rp.style.top=(e.clientY-r.top)+"px";rp.style.animationDelay=k*.2+"s";water.appendChild(rp);setTimeout(()=>rp.remove(),1700);}
 });
 
-// Frog: eye tracking
+/* ---------- frog: hand-drawn line boil + dysfunctional eyes ---------- */
 const frog=$("#frog"), pupils=[...frog.querySelectorAll(".pupil")];
-window.addEventListener("pointermove", e=>{
-  const box=frog.getBoundingClientRect(), sx=box.width/300, sy=box.height/260;
+if(!reduce){ const t=$("#boilT"); let seed=1; setInterval(()=>t.setAttribute("seed",(seed=seed%4+1)),140); }
+window.addEventListener("pointermove",e=>{
+  const box=frog.getBoundingClientRect(), sx=box.width/300, sy=box.height/450;
   pupils.forEach(p=>{
-    const cx=box.left+p.dataset.cx*sx, cy=box.top+p.dataset.cy*sy;
-    const a=Math.atan2(e.clientY-cy,e.clientX-cx);
-    const dist=Math.min(10, Math.hypot(e.clientX-cx,e.clientY-cy)/25);
-    p.setAttribute("transform",`translate(${Math.cos(a)*dist} ${Math.sin(a)*dist})`);
+    const cx=box.left+p.dataset.cx*sx, cy=box.top+p.dataset.cy*sy, dir=+p.dataset.dir;
+    const a=Math.atan2(e.clientY-cy,e.clientX-cx), d=Math.min(18,Math.hypot(e.clientX-cx,e.clientY-cy)/18);
+    p.setAttribute("transform",`translate(${Math.cos(a)*d*dir} ${Math.sin(a)*d*dir})`);  // right eye goes the WRONG way
   });
 });
-// Blinking
-(function blink(){
-  setTimeout(()=>{ frog.classList.add("blink"); setTimeout(()=>frog.classList.remove("blink"),140); blink(); }, rand(2200,5500));
-})();
 
-// Ribbit sound (synthesized, no files needed)
+/* croak sound (synth) */
 let ac;
 function croakSound(){
   try{
-    ac = ac || new (window.AudioContext||window.webkitAudioContext)();
-    const t=ac.currentTime;
-    [0,0.16].forEach(off=>{
-      const o=ac.createOscillator(), g=ac.createGain(), lfo=ac.createOscillator(), lg=ac.createGain(), f=ac.createBiquadFilter();
-      o.type="sawtooth"; o.frequency.setValueAtTime(rand(150,190),t+off); o.frequency.exponentialRampToValueAtTime(90,t+off+.14);
-      lfo.frequency.value=38; lg.gain.value=40; lfo.connect(lg); lg.connect(o.frequency);
-      f.type="bandpass"; f.frequency.value=600; f.Q.value=2.5;
-      g.gain.setValueAtTime(0,t+off); g.gain.linearRampToValueAtTime(.35,t+off+.02); g.gain.exponentialRampToValueAtTime(.001,t+off+.15);
-      o.connect(f); f.connect(g); g.connect(ac.destination);
-      o.start(t+off); lfo.start(t+off); o.stop(t+off+.16); lfo.stop(t+off+.16);
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)(); const t=ac.currentTime;
+    [0,.15].forEach(off=>{
+      const o=ac.createOscillator(),g=ac.createGain(),lfo=ac.createOscillator(),lg=ac.createGain(),f=ac.createBiquadFilter();
+      o.type="sawtooth";o.frequency.setValueAtTime(rand(140,200),t+off);o.frequency.exponentialRampToValueAtTime(80,t+off+.14);
+      lfo.frequency.value=40;lg.gain.value=45;lfo.connect(lg);lg.connect(o.frequency);
+      f.type="bandpass";f.frequency.value=650;f.Q.value=2.5;
+      g.gain.setValueAtTime(0,t+off);g.gain.linearRampToValueAtTime(.35,t+off+.02);g.gain.exponentialRampToValueAtTime(.001,t+off+.15);
+      o.connect(f);f.connect(g);g.connect(ac.destination);o.start(t+off);lfo.start(t+off);o.stop(t+off+.16);lfo.stop(t+off+.16);
     });
   }catch(e){}
 }
-
-// Ribbit counter (per-visitor, saved in the browser)
-let count=0;
-try{ count=parseInt(localStorage.getItem("frogman-ribbits")||"0",10)||0; }catch(e){}
+function burstAt(x,y,n=8){
+  for(let i=0;i<n;i++){
+    const im=document.createElement("img"); im.className="burst"; im.src=pick(Object.values(EMOTES)).src; im.alt="";
+    im.style.left=(x-28)+"px"; im.style.top=(y-28)+"px";
+    const a=rand(0,Math.PI*2), r=rand(90,220);
+    im.style.setProperty("--bx",Math.cos(a)*r+"px"); im.style.setProperty("--by",Math.sin(a)*r-60+"px"); im.style.setProperty("--br",rand(-360,360)+"deg");
+    document.body.appendChild(im); setTimeout(()=>im.remove(),1200);
+  }
+}
+let count=0; try{count=+localStorage.getItem("frogman-pokes")||0;}catch(e){}
 $("#count").textContent=count;
-const words=["RIBBIT!","CROAK!","*ribbit*","say ahh!","RIBBIT!!","bweh!","hop hop!","you're damp."];
+const lines=["o shit waddup","RIBBIT","*croak*","say ahh","ur damp. next","FeelsGoodMan","pls stop","i'm a doctor","where's my wheel","monkaS"];
 const bubble=$("#bubble");
-let bubbleT;
-$("#frogBtn").addEventListener("click", ()=>{
-  frog.classList.remove("croak"); void frog.offsetWidth; frog.classList.add("croak");
+$("#frogBtn").addEventListener("click",e=>{
+  frog.classList.remove("croak"); void frog.getBoundingClientRect(); frog.classList.add("croak");
   croakSound();
-  bubble.textContent = count>0 && count%25===0 ? `${count} ribbits?! 🪰` : words[Math.floor(Math.random()*words.length)];
-  bubble.classList.add("show"); clearTimeout(bubbleT); bubbleT=setTimeout(()=>bubble.classList.remove("show"),900);
-  count++; $("#count").textContent=count;
-  try{ localStorage.setItem("frogman-ribbits",count); }catch(e){}
+  bubble.textContent = count && count%10===0 ? `${count} POKES?? 💀` : pick(lines);
+  bubble.classList.remove("pop"); void bubble.offsetWidth; bubble.classList.add("pop");
+  const r=frog.getBoundingClientRect(); burstAt(e.clientX||r.left+r.width/2, e.clientY||r.top+r.height/3, reduce?0:7);
+  count++; $("#count").textContent=count; try{localStorage.setItem("frogman-pokes",count);}catch(err){}
+  if(count%15===0) { document.body.classList.add("shake"); setTimeout(()=>document.body.classList.remove("shake"),450); }
+  addMsg(pick(USERS),pick(["LMAO :PepeLaugh:","he poked him :monkaS:","o shit waddup","RIBBIT :peepoClap:","leave him alone :PepeHands:"]));
 });
-frog.addEventListener("animationend", e=>{ if(e.animationName==="croak") frog.classList.remove("croak"); });
+frog.addEventListener("animationend",e=>{ if(e.animationName==="croak") frog.classList.remove("croak"); });
 
-// Schedule (converted to visitor's local time)
-function zonedToLocal(dayIdx, hhmm, tz){
-  // Find the next date that is `dayIdx` (0=Sun) in `tz`, at hh:mm in tz, and return a Date.
-  const [h,m]=hhmm.split(":").map(Number);
-  const now=new Date();
+/* ---------- fake chat ---------- */
+const USERS=[["tadpole_tim","#ff7f50"],["xX_lilypad_Xx","#9acd32"],["heron_hater","#1e90ff"],["bogwitch","#da70d6"],["mossboss","#00ff7f"],["fly_enjoyer","#ffd700"],["croakington","#ff69b4"],["swamp_nurse","#87cefa"],["mudpuppy99","#ff4500"],["wheel_truther","#b0e0e6"]];
+const CHAT=[
+  "o shit waddup","here he comes :monkaS:",":FeelsGoodMan: :FeelsGoodMan: :FeelsGoodMan:","doc my leg is damp","where is the unicycle :Sadge:",
+  "this site is broken :PepeLaugh:","RIBBIT","first",":widepeepoHappy:","doc is that legal",":COPIUM: he'll get the wheel back",
+  "EZ :EZ:","is this a real doctor :monkaS:",":peepoClap: :peepoClap:","heron in chat??","FROGMAN FROGMAN FROGMAN",
+  ":pepeSmug: nice website","my frog has a cough :Pepega:",":frogmanDoc: say ahh","lost the game again :PepeHands:","croak if you love the swamp",
+  ":FeelsBadMan: missed stream yesterday","who let him code"
+];
+const msgs=$("#msgs");
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function render(t){ return esc(t).replace(/:(\w+):/g,(m,n)=>byName[n]?`<img src="${byName[n].src}" alt="${n}" title="${n}">`:m); }
+function addMsg(u,t){
+  const p=document.createElement("p"); p.innerHTML=`<b style="color:${u[1]}">${u[0]}</b>: ${render(t)}`;
+  msgs.appendChild(p); while(msgs.children.length>30) msgs.firstChild.remove();
+}
+for(let i=0;i<8;i++) addMsg(pick(USERS),pick(CHAT));
+(function tick(){ setTimeout(()=>{ addMsg(pick(USERS),pick(CHAT)); tick(); }, rand(900,2600)); })();
+$("#chatForm").addEventListener("submit",e=>{
+  e.preventDefault(); const v=$("#chatIn").value.trim(); if(!v) return;
+  addMsg(["you","#c6ff3d"],v); $("#chatIn").value="";
+  setTimeout(()=>addMsg(["D_R_FROGMAN","#5fbf3a"],pick(["ribbit","o shit waddup","noted :frogmanDoc:","ur damp","ok :FeelsGoodMan:","no :pepeSmug:"])),900);
+});
+
+/* ---------- schedule ---------- */
+function zonedToLocal(dayIdx,hhmm,tz){
+  const [h,m]=hhmm.split(":").map(Number), now=new Date();
   const fmt=new Intl.DateTimeFormat("en-US",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23",weekday:"short"});
   const parts=Object.fromEntries(fmt.formatToParts(now).map(p=>[p.type,p.value]));
   const tzNow=Date.UTC(+parts.year,+parts.month-1,+parts.day,+parts.hour,+parts.minute);
-  const offset=tzNow-Math.floor(now.getTime()/60000)*60000;  // tz offset in ms
-  const curDay=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(parts.weekday);
-  const delta=(dayIdx-curDay+7)%7;
-  const target=Date.UTC(+parts.year,+parts.month-1,+parts.day+delta,h,m);
-  return new Date(target-offset);
+  const offset=tzNow-Math.floor(now.getTime()/60000)*60000;
+  const curDay=DAYS.indexOf(parts.weekday), delta=(dayIdx-curDay+7)%7;
+  return new Date(Date.UTC(+parts.year,+parts.month-1,+parts.day+delta,h,m)-offset);
 }
-const days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-const pond=$("#pond");
-CONFIG.schedule.forEach(s=>{
-  let timeLabel="Off", dayLabel=s.day;
-  if(!s.off){
-    try{
-      const d=zonedToLocal(days.indexOf(s.day), s.time, CONFIG.timezone);
-      timeLabel=d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
-      dayLabel=d.toLocaleDateString([], {weekday:"short"});
-    }catch(e){ timeLabel=s.time; }
-  }
+const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+CONFIG.schedule.forEach((s,i)=>{
+  let timeLabel=s.off?"OFF":s.time, dayLabel=s.day;
+  if(!s.off){ try{ const d=zonedToLocal(DAYS.indexOf(s.day),s.time,CONFIG.timezone);
+    timeLabel=d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}); dayLabel=d.toLocaleDateString([],{weekday:"short"}); }catch(e){} }
   const el=document.createElement("div"); el.className="day"+(s.off?" off":"");
-  el.innerHTML=`<svg class="padbg" viewBox="0 0 100 100" aria-hidden="true"><use href="#lilypad"/></svg>
-    <div><div class="dname">${dayLabel}</div><div class="time">${timeLabel}</div><div class="what">${s.what}</div></div>`;
-  pond.appendChild(el);
+  el.style.setProperty("--r",((i*37)%30-15)+"deg"); el.style.setProperty("--y",((i*53)%30-15)+"px");
+  el.innerHTML=`<svg class="padbg" viewBox="0 0 100 100" aria-hidden="true" style="transform:rotate(${i*77}deg)"><use href="#lilypad"/></svg>
+    <div><div class="dname">${dayLabel}</div><div class="time">${timeLabel}</div><div class="what">${render(s.what)}</div></div>`;
+  $("#pond").appendChild(el);
 });
-try{ $("#tzName").textContent = "your local time ("+Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g," ")+")"; }catch(e){}
+document.querySelectorAll(".day .what img").forEach(i=>{i.style.width=i.style.height="22px";i.style.display="inline";i.style.verticalAlign="middle"});
+try{ $("#tzName").textContent="your local time ("+Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g," ")+")"; }catch(e){}
 
-// Copy Steam name
-const toast=$("#toast");
-function showToast(msg){ toast.textContent=msg; toast.classList.add("show"); setTimeout(()=>toast.classList.remove("show"),1800); }
-$("#steamName").addEventListener("click", async ()=>{
-  try{ await navigator.clipboard.writeText(name); showToast("🐸 Copied! See you in the swamp."); }
-  catch(e){ showToast("Steam name: "+name); }
-});
+/* ---------- dysfunction ---------- */
+const toast=$("#toast"); let tt;
+function showToast(m){ toast.textContent=m; toast.classList.add("show"); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove("show"),1800); }
+async function copy(text,msg){ try{ await navigator.clipboard.writeText(text); showToast(msg); }catch(e){ showToast(text); } }
+$("#steamName").addEventListener("click",()=>copy(NAME,"copied. see u in the swamp"));
 
-// Scroll reveal
-const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target);} }),{threshold:.15});
-document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+$("#fry").addEventListener("click",()=>{ const on=document.body.classList.toggle("fried"); $("#fry").textContent=on?"un-fry 🧊":"deep fry 🔥"; croakSound(); });
 
+// Win98 popup
+const popup=$("#popup"), okBtn=$("#popOk");
+const POPS={
+  auto:"swamp.exe has encountered a frog and needs to close. (it will not close)",
+  close:"you can't leave the swamp. the swamp is forever.",
+  min:"the frog cannot be minimized. he is already small.",
+  max:"MAXIMUM FROG ACHIEVED"
+};
+let dodges=0;
+function openPop(k){ $("#popMsg").textContent=POPS[k]||POPS.auto; dodges=0; okBtn.style.transform=""; popup.classList.add("show"); }
+function closePop(){ popup.classList.remove("show"); }
+okBtn.addEventListener("pointerenter",()=>{ if(dodges<3 && matchMedia("(hover:hover)").matches){ dodges++; okBtn.style.transform=`translate(${rand(-110,110)}px,${rand(-50,10)}px)`; } });
+okBtn.addEventListener("click",closePop); $("#popX").addEventListener("click",closePop);
+$("#popRibbit").addEventListener("click",()=>{ croakSound(); closePop(); showToast("ribbit accepted"); });
+document.querySelectorAll("[data-err]").forEach(b=>b.addEventListener("click",()=>openPop(b.dataset.err)));
+try{ if(!sessionStorage.getItem("frogpop")){ setTimeout(()=>{ openPop("auto"); try{sessionStorage.setItem("frogpop",1)}catch(e){} },9000); } }catch(e){ setTimeout(()=>openPop("auto"),9000); }
+
+// Sadge peeks in from the corner sometimes
+const peek=$("#peek");
+if(!reduce) (function peekLoop(){ setTimeout(()=>{ peek.classList.add("up"); setTimeout(()=>peek.classList.remove("up"),2200); peekLoop(); }, rand(12000,22000)); })();
+
+// fly trail cursor
+if(!reduce && matchMedia("(pointer:fine)").matches){
+  let last=0;
+  window.addEventListener("pointermove",e=>{
+    const now=performance.now(); if(now-last<70) return; last=now;
+    const t=document.createElement("span"); t.className="trail"; t.textContent=Math.random()<.85?"🪰":"🐸";
+    t.style.left=e.clientX+"px"; t.style.top=e.clientY+"px"; t.style.setProperty("--tx",rand(-30,30)+"px"); t.style.setProperty("--ty",rand(10,40)+"px");
+    document.body.appendChild(t); setTimeout(()=>t.remove(),720);
+  });
+}
+
+// visitor counter (per browser, it's a frog website)
+let hits=0; try{ hits=(+localStorage.getItem("frogman-hits")||Math.floor(rand(1200,4200)))+1; localStorage.setItem("frogman-hits",hits); }catch(e){ hits=1337; }
+$("#hits").innerHTML=String(hits).padStart(7,"0").split("").map(d=>`<b>${d}</b>`).join("");
 $("#yr").textContent=new Date().getFullYear();
 </script>
 </body>
